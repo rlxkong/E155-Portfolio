@@ -1,0 +1,10 @@
+---
+title: "Lab 1 Report"
+author: "Rebecca Kong"
+date: "9/8/26"
+draft: false
+---
+## Introduction
+In this lab, a development board was built and programmed using SystemVerilog. This lab focused on using SystemVerilog to program the FPGA using switches, LEDs, and a seven-segment display. The goals were to test out the assembled development board, practice programming in SystemVerilog, and to gain experience in building, assembling, testing, and debugging circuits.
+
+## Design and Testing Methodology

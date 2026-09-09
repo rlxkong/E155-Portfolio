@@ -1,0 +1,6 @@
+
+---
+title: "Resources"
+---
+
+[E155 MicroPs Homepage](https://hmc-e155.github.io/): The official homepage for the E155 course, which contains links to the course syllabus, lab instructions, and other resources.
