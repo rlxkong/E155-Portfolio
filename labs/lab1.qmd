@@ -2,8 +2,6 @@
 title: "Lab 1 Report"
 author: "Rebecca Kong"
 date: "9/8/26"
-resources:
- - images/lab1
 draft: false
 ---
 ## Introduction
@@ -24,9 +22,7 @@ The counter logic module was responsible for using sequential logic to make an l
 
 ::: {.callout-note collapse="true"}
 ## Maximum Count Value Calculation
-![](images/lab1/maxcount_calc.jpg)
-
-Figure 1: Calculations to find the maximum count value
+![Figure 1: Calculations to find the maximum count value](lab1_images/maxcount_calc.jpg)
 :::
 
 There was also an enable and reset input implemented into the code.
@@ -39,9 +35,7 @@ The 7-segment display circuit was built and assigned GPIO pins along with a curr
 
 ::: {.callout-note collapse="true"}
 ## Resistor Calculation
-![](images/lab1/resistor_calc.jpg)
-
-Figure 2: Current-limiting resistor calculation
+![Figure 2: Current-limiting resistor calculation](lab1_images/resistor_calc.jpg)
 :::
 
 ## Technical Documentation
@@ -51,9 +45,8 @@ The source code for the project can be found in the associated [GitHub repositor
 ::: {.callout-note collapse="true"}
 ## Block Diagram
 
-![](images/lab1/block_diagram.jpg)
+![Figure 3: Block Diagram of the top module](lab1_images/block_diagram.jpg)
 
-Figure 3: Block Diagram of the top module
 :::
 The block diagram in Figure 3 demonstrates the overall architecture of the design. The top-level module includes three submodules: the high-speed oscillator (HSOSC), the switch-to-seven-segment logic module, and the counter logic module. It also contains the switch-to-LED logic.
 
@@ -61,9 +54,7 @@ The block diagram in Figure 3 demonstrates the overall architecture of the desig
 ::: {.callout-note collapse="true"}
 ## Schematic
 
-![](images/lab1/schematic.jpg)
-
-Figure 4: Schematic of the physical circuit
+![Figure 4: Schematic of the physical circuit](lab1_images/schematic.jpg)
 :::
 Figure 4 shows the schematic of the physical circuit. The 7-segment display is connected to the labeled GPIO pins through a current-limiting resistor and powered through the FPGA 3.3V supply.
 
@@ -76,25 +67,23 @@ Figure 5 show the successful simulation results of the top-level module testbenc
 
 ::: {.callout-note collapse="true"}
 ## Top-Level Module Testbench Simulation
-![](images/lab1/top_test_pass.png)
-Figure 5: Top-level module testbench simulation results. The HSOSC is checked by checking that it was low in the first half of its period and high in the second half (11ns in).
+![Figure 5: Top-level module testbench simulation results. The HSOSC is checked by checking that it was low in the first half of its period and high in the second half (11ns in).](lab1_images/top_test_pass.png)
 
-![](images/lab1/top_sim.png)
-Figure 6: The switch-to-LED logic is checked by checking that the output matches the expected output for a given input and the 7-segment input-output pairs are consistent as well to ensure connection to the 7-segment submodule.
 
-![](images/lab1/top_led2_sim.png)
-Figure 7: Top-level module connection to the counter module is shown through led2 changing states showing that its output responds to HSOSC.
+![Figure 6: The switch-to-LED logic is checked by checking that the output matches the expected output for a given input and the 7-segment input-output pairs are consistent as well to ensure connection to the 7-segment submodule.](lab1_images/top_sim.png)
+
+
+![Figure 7: Top-level module connection to the counter module is shown through led2 changing states showing that its output responds to HSOSC.](lab1_images/top_led2_sim.png)
 :::
 
 Figure 8 shows the successful simulation results of the counter module testbench. The counter is checked by verifying that the output changes state at the correct time based on the maxcount and that the reset and enable inputs work as expected.
 
 ::: {.callout-note collapse="true"}
 ## Counter Module Testbench Simulation
-![](images/lab1/counter_sim.png)
-Figure 8: Counter module testbench waveforms
+![Figure 8: Counter module testbench waveforms](lab1_images/counter_sim.png)
 
-![](images/lab1/frequency_reading.png)
-Figure 9: Frequency reading of the counter module output showing that it is blinking at 2.4 Hz
+![Figure 9: Frequency reading of the counter module output showing that it is blinking at 2.4 Hz](lab1_images/frequency_reading.png)
+
 :::
 
 Figure 10 shows the successful simulation results of the switch-to-seven-segment module testbench. The module is checked by verifying that the output matches the expected output for all input-output pairs.
@@ -102,9 +91,7 @@ Figure 10 shows the successful simulation results of the switch-to-seven-segment
 
 ::: {.callout-note collapse="true"}
 ## Switch-to-Seven-Segment Module Testbench Simulation
-![](images/lab1/sevenseg_sim.png)
-
-Figure 10: Switch-to-seven-segment module testbench waveforms
+![Figure 10: Switch-to-seven-segment module testbench waveforms](lab1_images/sevenseg_sim.png)
 :::
 
 ## Conclusion
