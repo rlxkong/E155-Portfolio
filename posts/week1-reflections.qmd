@@ -1,0 +1,14 @@
+---
+title: "Week 1 Reflections"
+description: "Building my development board and programming in SystemVerilog"
+author: "Rebecca Kong"
+date: "9/8/26"
+categories:
+  - reflection
+  - labreport
+draft: false
+---
+
+## Summary
+
+## Reflections on Lab
