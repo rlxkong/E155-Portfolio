@@ -1,6 +1,9 @@
 [
   {
-    "listing": "/posts/blog.html",
-    "items": []
+    "listing": "/blog.html",
+    "items": [
+      "/posts/week1-reflections.html",
+      "/posts/first-post.html"
+    ]
   }
 ]
