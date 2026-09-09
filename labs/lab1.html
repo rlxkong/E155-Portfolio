@@ -136,7 +136,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#block-diagram" id="toc-block-diagram" class="nav-link" data-scroll-target="#block-diagram">Block Diagram</a></li>
   <li><a href="#schematic" id="toc-schematic" class="nav-link" data-scroll-target="#schematic">Schematic</a></li>
   </ul></li>
-  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a>
+  <ul class="collapse">
+  <li><a href="#testbench-simulation" id="toc-testbench-simulation" class="nav-link" data-scroll-target="#testbench-simulation">Testbench Simulation</a></li>
+  </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#ai-prototype-summary" id="toc-ai-prototype-summary" class="nav-link" data-scroll-target="#ai-prototype-summary">AI Prototype Summary</a></li>
   </ul>
@@ -184,16 +187,32 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="design-and-testing-methodology">Design and Testing Methodology</h2>
 <section id="development-board-assembly" class="level4">
 <h4 class="anchored" data-anchor-id="development-board-assembly">Development Board Assembly</h4>
-<p>The development board was assembled according to the instructions provided in the lab manual as well as in reference to the [E155 Development Board BOM] (https://hmc-e155.github.io/assets/doc/E155_v4_Dev_Board_BOM.html). The board was then tested using the provided test programs.</p>
+<p>The development board was assembled according to the instructions provided in the lab manual as well as in reference to the <a href="https://hmc-e155.github.io/assets/doc/E155_v4_Dev_Board_BOM.html">E155 Development Board BOM</a>. The board was then tested using the provided test programs.</p>
 </section>
 <section id="fpga-design" class="level4">
 <h4 class="anchored" data-anchor-id="fpga-design">FPGA Design</h4>
 <p>The FPGA was designed using three modules written in SystemVerilog: the top level module, the switch-to-seven-segment logic module, and the counter logic module.</p>
 <p>The top level module was responsible for instantiating the other two modules and the switch-to-LED logic which was written using XOR and AND gates based on the truth tables.</p>
 <p>The switch-to-seven-segment logic module was responsible for taking the input from the switches and outputting the corresponding signals to the seven-segment display. Combinational logic was used to implement each combination of the four switches to display the correct segment patterns</p>
-<p>The counter logic module was responsible for using sequential logic to make an led blink at 2.4 Hz based on the 48 MHz internal HSOSC clock. The calculations used to divide the high frequency clock signal down to achieve the desired frequency are shown in Figure 1. ::: {.callout-note collapse=“true”} ## Maximum Count Value Calculation</p>
+<p>The counter logic module was responsible for using sequential logic to make an led blink at 2.4 Hz based on the 48 MHz internal HSOSC clock. The calculations used to divide the high frequency clock signal down to achieve the desired frequency are shown in Figure 1.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Maximum Count Value Calculation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p><img src="images/maxcount_calc.jpg" class="img-fluid"></p>
-<p>Figure 1: Calculations to find the maximum count value ::: There was also an enable and reset input implemented into the code.</p>
+<p>Figure 1: Calculations to find the maximum count value</p>
+</div>
+</div>
+</div>
+<p>There was also an enable and reset input implemented into the code.</p>
 </section>
 <section id="testbench-design" class="level4">
 <h4 class="anchored" data-anchor-id="testbench-design">Testbench Design</h4>
@@ -201,9 +220,24 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="hardware-testing" class="level4">
 <h4 class="anchored" data-anchor-id="hardware-testing">Hardware Testing</h4>
-<p>The 7-segment display circuit was built and assigned GPIO pins along with a current-limiting resistor which was calculated in Figure 2. ::: {.callout-note collapse=“true”} ## Resistor Calculation</p>
+<p>The 7-segment display circuit was built and assigned GPIO pins along with a current-limiting resistor which was calculated in Figure 2.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Resistor Calculation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p><img src="images/resistor_calc.jpg" class="img-fluid"></p>
-<p>Figure 2: Current-limiting resistor calculation :::</p>
+<p>Figure 2: Current-limiting resistor calculation</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="technical-documentation" class="level2">
@@ -212,7 +246,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="block-diagram" class="level3">
 <h3 class="anchored" data-anchor-id="block-diagram">Block Diagram</h3>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -221,7 +255,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><img src="images/block_diagram.jpg" class="img-fluid"></p>
 <p>Figure 3: Block Diagram of the top module</p>
@@ -233,7 +267,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="schematic" class="level3">
 <h3 class="anchored" data-anchor-id="schematic">Schematic</h3>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -242,7 +276,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><img src="images/schematic.jpg" class="img-fluid"></p>
 <p>Figure 4: Schematic of the physical circuit</p>
@@ -254,19 +288,68 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="results-and-discussion" class="level2">
 <h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
-<p>The design accomplished all of the design objectives. ### Testbench Simulation Figure 5 show the successful simulation results of the top-level module testbench. ::: {.callout-note collapse=“true”} ## Top-Level Module Testbench Simulation</p>
+<p>The design accomplished all of the design objectives.</p>
+<section id="testbench-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="testbench-simulation">Testbench Simulation</h3>
+<p>Figure 5 show the successful simulation results of the top-level module testbench.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Top-Level Module Testbench Simulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p><img src="images/top_test_pass.png" class="img-fluid"></p>
 <p>Figure 5: Top-level module testbench simulation results. The HSOSC is checked by checking that it was low in the first half of its period and high in the second half (11ns in).</p>
 <p><img src="images/top_sim.png" class="img-fluid"></p>
 <p>Figure 6: The switch-to-LED logic is checked by checking that the output matches the expected output for a given input and the 7-segment input-output pairs are consistent as well to ensure connection to the 7-segment submodule.</p>
 <p><img src="images/top_led2_sim.png" class="img-fluid"></p>
-<p>Figure 7: Top-level module connection to the counter module is shown through led2 changing states showing that its output responds to HSOSC. :::</p>
-<p>Figure 8 shows the successful simulation results of the counter module testbench. The counter is checked by verifying that the output changes state at the correct time based on the maxcount and that the reset and enable inputs work as expected. ::: {.callout-note collapse=“true”} ## Counter Module Testbench Simulation</p>
+<p>Figure 7: Top-level module connection to the counter module is shown through led2 changing states showing that its output responds to HSOSC.</p>
+</div>
+</div>
+</div>
+<p>Figure 8 shows the successful simulation results of the counter module testbench. The counter is checked by verifying that the output changes state at the correct time based on the maxcount and that the reset and enable inputs work as expected.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Counter Module Testbench Simulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p><img src="images/counter_sim.png" class="img-fluid"></p>
-<p>Figure 8: Counter module testbench waveforms :::</p>
-<p>Figure 9 shows the successful simulation results of the switch-to-seven-segment module testbench. The module is checked by verifying that the output matches the expected output for all input-output pairs. ::: {.callout-note collapse=“true”} ## Switch-to-Seven-Segment Module Testbench Simulation</p>
+<p>Figure 8: Counter module testbench waveforms</p>
+</div>
+</div>
+</div>
+<p>Figure 9 shows the successful simulation results of the switch-to-seven-segment module testbench. The module is checked by verifying that the output matches the expected output for all input-output pairs.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Switch-to-Seven-Segment Module Testbench Simulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p><img src="images/sevenseg_sim.png" class="img-fluid"></p>
-<p>Figure 9: Switch-to-seven-segment module testbench waveforms :::</p>
+<p>Figure 9: Switch-to-seven-segment module testbench waveforms</p>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
@@ -275,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="ai-prototype-summary" class="level2">
 <h2 class="anchored" data-anchor-id="ai-prototype-summary">AI Prototype Summary</h2>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -284,7 +367,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>module top ( output logic led );</p>
 <pre><code>// iCE40 UltraPlus internal high-frequency oscillator.
@@ -319,7 +402,7 @@ end</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -328,7 +411,7 @@ end</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>module top ( output logic led );</p>
 <pre><code>logic clk;
