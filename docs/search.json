@@ -1,10 +1,31 @@
 [
   {
-    "objectID": "posts/week1-reflections.html#reflections-on-lab",
-    "href": "posts/week1-reflections.html#reflections-on-lab",
-    "title": "Week 1 Reflections",
-    "section": "Reflections on Lab",
-    "text": "Reflections on Lab"
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "E155 MicroPs Homepage: The official homepage for the E155 course, which contains links to the course syllabus, lab instructions, and other resources."
+  },
+  {
+    "objectID": "labs/lab1.html",
+    "href": "labs/lab1.html",
+    "title": "Lab 1 Report",
+    "section": "",
+    "text": "In this lab, a development board was built and programmed using SystemVerilog. This lab focused on using SystemVerilog to program the FPGA using switches, LEDs, and a seven-segment display. The goals were to test out the assembled development board, practice programming in SystemVerilog, and to gain experience in building, assembling, testing, and debugging circuits."
+  },
+  {
+    "objectID": "labs/lab1.html#introduction",
+    "href": "labs/lab1.html#introduction",
+    "title": "Lab 1 Report",
+    "section": "",
+    "text": "In this lab, a development board was built and programmed using SystemVerilog. This lab focused on using SystemVerilog to program the FPGA using switches, LEDs, and a seven-segment display. The goals were to test out the assembled development board, practice programming in SystemVerilog, and to gain experience in building, assembling, testing, and debugging circuits."
+  },
+  {
+    "objectID": "labs/lab1.html#design-and-testing-methodology",
+    "href": "labs/lab1.html#design-and-testing-methodology",
+    "title": "Lab 1 Report",
+    "section": "Design and Testing Methodology",
+    "text": "Design and Testing Methodology"
   },
   {
     "objectID": "blog.html",
@@ -33,5 +54,82 @@
     "title": "E155 Portfolio",
     "section": "Experience",
     "text": "Experience\nSenseTime | Content Operations Intern | July 2026 - Aug 2026\nEntrepeneurship Studio Program | Student Researcher | Jun 2025 - Aug 2025"
+  },
+  {
+    "objectID": "labs.html",
+    "href": "labs.html",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 1 Report"
+  },
+  {
+    "objectID": "labs.html#lab-1-fpga-and-mcu-setup-testing",
+    "href": "labs.html#lab-1-fpga-and-mcu-setup-testing",
+    "title": "E155 Labs",
+    "section": "",
+    "text": "Lab 1 Report"
+  },
+  {
+    "objectID": "labs.html#lab-2-multiplexed-7-segment-display",
+    "href": "labs.html#lab-2-multiplexed-7-segment-display",
+    "title": "E155 Labs",
+    "section": "Lab 2: Multiplexed 7-Segment Display",
+    "text": "Lab 2: Multiplexed 7-Segment Display\nin progress"
+  },
+  {
+    "objectID": "labs.html#lab-3-keypad-scanner",
+    "href": "labs.html#lab-3-keypad-scanner",
+    "title": "E155 Labs",
+    "section": "Lab 3: Keypad Scanner",
+    "text": "Lab 3: Keypad Scanner"
+  },
+  {
+    "objectID": "labs.html#lab-4-digital-audio",
+    "href": "labs.html#lab-4-digital-audio",
+    "title": "E155 Labs",
+    "section": "Lab 4: Digital Audio",
+    "text": "Lab 4: Digital Audio"
+  },
+  {
+    "objectID": "labs.html#lab-5-interrupts",
+    "href": "labs.html#lab-5-interrupts",
+    "title": "E155 Labs",
+    "section": "Lab 5: Interrupts",
+    "text": "Lab 5: Interrupts"
+  },
+  {
+    "objectID": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface-spi",
+    "href": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface-spi",
+    "title": "E155 Labs",
+    "section": "Lab 6: The Internet of Things and Serial Peripheral Interface (SPI)",
+    "text": "Lab 6: The Internet of Things and Serial Peripheral Interface (SPI)"
+  },
+  {
+    "objectID": "labs.html#lab-7-the-advanced-encryption-standard-aes",
+    "href": "labs.html#lab-7-the-advanced-encryption-standard-aes",
+    "title": "E155 Labs",
+    "section": "Lab 7: The Advanced Encryption Standard (AES)",
+    "text": "Lab 7: The Advanced Encryption Standard (AES)"
+  },
+  {
+    "objectID": "posts/week1-reflections.html",
+    "href": "posts/week1-reflections.html",
+    "title": "Week 1 Reflections",
+    "section": "",
+    "text": "In this lab we assembled a development board as well as tested out the MCU and FPGA boards. However, the main focus of the lab was to program the FPGA using SystemVerilog. We wrote SystemVerilog code to control the switches, LEDs, and 7-segment display to ensure the board was operational. The programs used were Lattice Radiant (which included QuestaSim) for FPGA as well as a little bit of SEGGER Embedded Studio when testing the MCU. The lab was a succes and we were able to successfully program the FPGA to meet the specifications."
+  },
+  {
+    "objectID": "posts/week1-reflections.html#summary",
+    "href": "posts/week1-reflections.html#summary",
+    "title": "Week 1 Reflections",
+    "section": "",
+    "text": "In this lab we assembled a development board as well as tested out the MCU and FPGA boards. However, the main focus of the lab was to program the FPGA using SystemVerilog. We wrote SystemVerilog code to control the switches, LEDs, and 7-segment display to ensure the board was operational. The programs used were Lattice Radiant (which included QuestaSim) for FPGA as well as a little bit of SEGGER Embedded Studio when testing the MCU. The lab was a succes and we were able to successfully program the FPGA to meet the specifications."
+  },
+  {
+    "objectID": "posts/week1-reflections.html#reflections-on-lab",
+    "href": "posts/week1-reflections.html#reflections-on-lab",
+    "title": "Week 1 Reflections",
+    "section": "Reflections on Lab",
+    "text": "Reflections on Lab\nThis lab was a great introduction to the course and it was a beneficial experience to learn how to assemble the development board–specifically learning how to solder SMT components and learning how to use solder paste. The tutorials were very beneficial in terms of refreshing my memory on topics as well as teaching me how to use new software. Personally, I found the videos most helpful as following along made the process easier.One downside was that following the instructions while clicking through all the different links and tutorials was a bit confusing. I think it would be beneficial to create an organized list of all the links and tutorials that are needed on a side bar to make locating the resources easier. There were some issues with the connecting the board to program as well as with the software programs themselves, but overall I thought the lab was very detailed and informative. I think in the future I need to first comprehensively read over the lab to try and understand the goals at hand and create a plan of action before diving into the lab. I think this will help me to be more efficient and organized in my work. Due to learning to use new tools, board soldering, and refreshing old topics, this lab took longer taking me around 30 hours."
   }
 ]
