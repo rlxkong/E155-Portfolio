@@ -82,16 +82,18 @@ Figure 8 shows the successful simulation results of the counter module testbench
 ## Counter Module Testbench Simulation
 ![Figure 8: Counter module testbench waveforms](lab1_images/counter_sim.png)
 
-![Figure 9: Frequency reading of the counter module output showing that it is blinking at 2.4 Hz](lab1_images/frequency_reading.png)
+![Figure 9: Enable and reset waveform validations](lab1_images/enable-reset_sim.png)
+
+![Figure 10: Frequency reading of the counter module output showing that it is blinking at 2.4 Hz](lab1_images/frequency_reading.png)
 
 :::
 
-Figure 10 shows the successful simulation results of the switch-to-seven-segment module testbench. The module is checked by verifying that the output matches the expected output for all input-output pairs.
+Figure 11 shows the successful simulation results of the switch-to-seven-segment module testbench. The module is checked by verifying that the output matches the expected output for all input-output pairs.
 
 
 ::: {.callout-note collapse="true"}
 ## Switch-to-Seven-Segment Module Testbench Simulation
-![Figure 10: Switch-to-seven-segment module testbench waveforms](lab1_images/sevenseg_sim.png)
+![Figure 11: Switch-to-seven-segment module testbench waveforms](lab1_images/sevenseg_sim.png)
 :::
 
 ## Conclusion
