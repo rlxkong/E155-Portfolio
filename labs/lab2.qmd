@@ -35,8 +35,9 @@ The dual 7-segment display circuit was built and assigned GPIO pins along with a
 :::
 
 The keyboard scanner circuit was also built and assigned GPIO pins but with a current-limited reistor that followed an NPN transistor calculated in Figure2.
+
 ::: {.callout-note collapse="true"}
-## PNP Transitor Resistor Calculation
+## NPN Transitor Resistor Calculation
 ![Figure 2: Calculations to find the resistor value following the transistor](lab2_images/NPN_calc.JPG)
 :::
 
