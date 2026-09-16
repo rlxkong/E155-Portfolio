@@ -31,13 +31,13 @@ The dual 7-segment display circuit was built and assigned GPIO pins along with a
 
 ::: {.callout-note collapse="true"}
 ## PNP Transitor Resistor Calculation
-![Figure 1: Calculations to find the resistor value following the transistor](lab2_images/.jpg)
+![Figure 1: Calculations to find the resistor value following the transistor](lab2_images/PNP_calc.jpg)
 :::
 
 The keyboard scanner circuit was also built and assigned GPIO pins but with a current-limited reistor that followed an NPN transistor calculated in Figure2.
 ::: {.callout-note collapse="true"}
 ## PNP Transitor Resistor Calculation
-![Figure 2: Calculations to find the resistor value following the transistor](lab2_images/.jpg)
+![Figure 2: Calculations to find the resistor value following the transistor](lab2_images/NPN_calc.JPG)
 :::
 
 
@@ -48,7 +48,7 @@ The source code for the project can be found in the associated [GitHub repositor
 ::: {.callout-note collapse="true"}
 ## Block Diagram
 
-![Figure 3: Block Diagram of the top module](lab1_images/block_diagram.jpg)
+![Figure 3: Block Diagram of the top module](lab2_images/block_diagram.JPG)
 
 :::
 The block diagram in Figure 3 demonstrates the overall architecture of the design. The top-level module includes four submodules: the high-speed oscillator (HSOSC), the switch-to-seven-segment logic module,  the counter logic module, and the scanning module. It also contains the powering and selecting of the segment display and keyboard to LED logic.
@@ -57,7 +57,8 @@ The block diagram in Figure 3 demonstrates the overall architecture of the desig
 ::: {.callout-note collapse="true"}
 ## Schematic
 
-![Figure 4: Schematic of the physical circuit](lab1_images/schematic.jpg)
+![Figure 4: Schematic of the dual seven-segment physical circuit](lab2_images/sevenseg.jpg)
+![Figure 4: Schematic of the scanning keyboard physical circuit](lab2_images/keyboard.jpg)
 :::
 Figure 4 shows the schematic of the dual 7-segment physical circuit. The dual 7-segment display is connected to the labeled GPIO pins through a current-limiting resistor and powered through PNP transistors from the FPGA 3.3V supply.
 Figure 5 shows the schematic of the keyboard scanning circuit. The keyboard is connected to the labeled GPIO pins and the row are connected via a resistor through a NPN transistor. The LEDs are also connected to GPIO pins with a 
@@ -67,134 +68,217 @@ The design accomplished all of the design objectives.
 
 ### Testbench Simulation
 
-Figure 5 show the successful simulation results of the top-level module testbench. 
+Figure 6 show the successful simulation results of the top-level module testbench. This exercises the multiplexing and LED driving functionality.
 
 ::: {.callout-note collapse="true"}
 ## Top-Level Module Testbench Simulation
-![Figure 5: Top-level module testbench simulation results. The HSOSC is checked by checking that it was low in the first half of its period and high in the second half (11ns in).](lab1_images/top_test_pass.png)
+![Figure 6: Top-level module testbench simulation results. These tests demonstrates the beginning of the tests.](lab2_images/top_beginning.png)
 
 
-![Figure 6: The switch-to-LED logic is checked by checking that the output matches the expected output for a given input and the 7-segment input-output pairs are consistent as well to ensure connection to the 7-segment submodule.](lab1_images/top_sim.png)
+![Figure 7: Top-level module testbench simulation results. These tests demonstrates the end of the tests.](lab2_images/top_end.png)
 
 
-![Figure 7: Top-level module connection to the counter module is shown through led2 changing states showing that its output responds to HSOSC.](lab1_images/top_led2_sim.png)
-:::
 
-Figure 8 shows the successful simulation results of the counter module testbench. The counter is checked by verifying that the output changes state at the correct time based on the maxcount and that the reset and enable inputs work as expected.
+Figure 8 shows the successful simulation results of the scanning module testbench. The scanner is checked by verifying that all four output states are correct and reset and enable inputs work as expected.
 
 ::: {.callout-note collapse="true"}
 ## Counter Module Testbench Simulation
-![Figure 8: Counter module testbench waveforms](lab1_images/counter_sim.png)
+![Figure 8: Scanning module testbench waveforms](lab2_images/scanning.png)
 
-![Figure 9: Enable and reset waveform validations](lab1_images/enable-reset_sim.png)
-
-![Figure 10: Frequency reading of the counter module output showing that it is blinking at 2.4 Hz](lab1_images/frequency_reading.png)
-
-:::
-
-Figure 11 shows the successful simulation results of the switch-to-seven-segment module testbench. The module is checked by verifying that the output matches the expected output for all input-output pairs.
-
-
-::: {.callout-note collapse="true"}
-## Switch-to-Seven-Segment Module Testbench Simulation
-![Figure 11: Switch-to-seven-segment module testbench waveforms](lab1_images/sevenseg_sim.png)
-:::
 
 ## Conclusion
-The design succesfully blinked an LED at 2.4 Hz, displayed the correct output on the 7-segment display based on the input from the switches, and displayed the correct output on the LEDs based on the input from the switches. I spent a total of around 30 hours working on this lab.
+The design succesfully implemented a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins and installed a keypad that logic signals can pass through. I spent a total of around 24 hours working on this lab.
 
 ## AI Prototype Summary
 
 ::: {.callout-note collapse="true"}
-## ChatGPT Generated Code Attempt 1
-module top (
-    output logic led
+## ChatGPT Generated Code Prompt 1
+module seven_segment_mux (
+    input  logic       clk,
+    input  logic [3:0] digit0,
+    input  logic [3:0] digit1,
+
+    output logic [6:0] seg0,
+    output logic [6:0] seg1
 );
 
-    // iCE40 UltraPlus internal high-frequency oscillator.
-    // 24 MHz is one of the supported SB_HFOSC frequencies.
-    logic clk;
+    logic       select;
+    logic [3:0] decoder_input;
+    logic [6:0] decoder_output;
 
-    SB_HFOSC #(
-        .CLKHF_DIV("0b00")       // 24 MHz
-    ) hfosc (
-        .CLKHFPU(1'b1),          // Power up oscillator
-        .CLKHFEN(1'b1),          // Enable oscillator
-        .CLKHF(clk)
-    );
+    // Divide the clock to create the multiplexing rate.
+    // Adjust COUNTER_MAX for the desired refresh frequency.
+    localparam int COUNTER_MAX = 50_000;
 
-    // 24 MHz / 12,000,000 = 2 Hz
-    // Toggle the LED every 0.5 s.
-    localparam int unsigned HALF_PERIOD = 12_000_000;
+    logic [$clog2(COUNTER_MAX)-1:0] counter;
 
-    logic [$clog2(HALF_PERIOD)-1:0] counter;
-
+    // Multiplex between the two 4-bit inputs.
     always_ff @(posedge clk) begin
-        if (counter == HALF_PERIOD - 1) begin
+        if (counter == COUNTER_MAX - 1) begin
             counter <= '0;
-            led     <= ~led;
+            select  <= ~select;
         end
         else begin
             counter <= counter + 1'b1;
         end
     end
 
+    // Select which input is presented to the single decoder.
+    always_comb begin
+        if (select)
+            decoder_input = digit1;
+        else
+            decoder_input = digit0;
+    end
+
+    // Single 4-bit to 7-segment decoder.
+    // Common-anode display: 0 = segment ON, 1 = segment OFF.
+    always_comb begin
+        case (decoder_input)
+            4'h0: decoder_output = 7'b1000000;
+            4'h1: decoder_output = 7'b1111001;
+            4'h2: decoder_output = 7'b0100100;
+            4'h3: decoder_output = 7'b0110000;
+            4'h4: decoder_output = 7'b0011001;
+            4'h5: decoder_output = 7'b0010010;
+            4'h6: decoder_output = 7'b0000010;
+            4'h7: decoder_output = 7'b1111000;
+            4'h8: decoder_output = 7'b0000000;
+            4'h9: decoder_output = 7'b0010000;
+            4'hA: decoder_output = 7'b0001000;
+            4'hB: decoder_output = 7'b0000011;
+            4'hC: decoder_output = 7'b1000110;
+            4'hD: decoder_output = 7'b0100001;
+            4'hE: decoder_output = 7'b0000110;
+            4'hF: decoder_output = 7'b0001110;
+            default: decoder_output = 7'b1111111;
+        endcase
+    end
+
+    // Store the decoder result into the selected output.
+    always_ff @(posedge clk) begin
+        if (select)
+            seg1 <= decoder_output;
+        else
+            seg0 <= decoder_output;
+    end
+
 endmodule
+
+This code is somewhat similar to what I wrote in terms of logic of choosing which digit to display. It also has similar segment choosing logic and works well for displaying two numbers alternating on one display. 
+
 :::
 ::: {.callout-note collapse="true"}
-## ChatGPT Generated Code Succesful Synthesis
-module top (
-    output logic led
+## ChatGPT Generated Code Prompt 2
+//  lab1_sevenseg_mux_rk.sv
+//  Rebecca Kong
+//
+//  Time-multiplexes one seven-segment decoder between two
+//  4-bit inputs. The decoder drives a common-anode display,
+//  so the segment outputs are active-low.
+//
+//  digit0 and digit1 are the two sets of seven segment outputs.
+//  Only one set is enabled at a time, but switching occurs
+//  rapidly enough that both displays appear continuously lit.
+
+module lab1_sevenseg_mux_rk #(
+    parameter integer MUX_COUNT = 10000
+) (
+    input  logic       reset,
+    input  logic [3:0] switch0,
+    input  logic [3:0] switch1,
+
+    output logic [6:0] digit0,
+    output logic [6:0] digit1
 );
 
-    logic clk;
+    // Internal high-speed oscillator
+    logic int_osc;
 
-    // iCE40 UltraPlus internal high-speed oscillator.
-    // Radiant primitive: HSOSC
-    //
-    // CLKHF_DIV:
-    //   2'b00 = 48 MHz
-    //   2'b01 = 24 MHz
-    //   2'b10 = 12 MHz
-    //   2'b11 =  6 MHz
-    //
-    HSOSC #(
-        .CLKHF_DIV(2'b01)
-    ) hfosc (
-        .CLKHFPU(1'b1),
-        .CLKHFEN(1'b1),
-        .CLKHF(clk)
-    );
+    // Counter used to determine when to switch displays
+    logic [$clog2(MUX_COUNT)-1:0] mux_count;
 
-    // 24 MHz clock.
-    //
-    // Toggle every 6,000,000 clocks:
-    //
-    //   6,000,000 / 24,000,000 = 0.25 seconds
-    //
-    // Thus:
-    //   LED ON  = 0.25 s
-    //   LED OFF = 0.25 s
-    //   complete cycle = 0.5 s
-    //   blink frequency = 2 Hz
-    //
-    localparam int unsigned HALF_PERIOD = 6_000_000;
-    localparam int unsigned COUNTER_WIDTH = $clog2(HALF_PERIOD);
+    // Selects which input is currently being decoded
+    logic mux_select;
 
-    logic [COUNTER_WIDTH-1:0] counter = '0;
+    // Input to the single seven-segment decoder
+    logic [3:0] decoder_input;
 
-    always_ff @(posedge clk) begin
-        if (counter == HALF_PERIOD - 1) begin
-            counter <= '0;
-            led     <= ~led;
+    // Output of the single seven-segment decoder
+    logic [6:0] decoder_output;
+
+
+    //------------------------------------------------------------------
+    // Internal high-speed oscillator
+    //------------------------------------------------------------------
+    HSOSC #(.CLKHF_DIV(2'b00))
+        hf_osc (
+            .CLKHFPU(1'b1),
+            .CLKHFEN(1'b1),
+            .CLKHF(int_osc)
+        );
+
+
+    //------------------------------------------------------------------
+    // Multiplexing counter
+    //------------------------------------------------------------------
+    always_ff @(posedge int_osc) begin
+        if (reset == 0) begin
+            mux_count  <= '0;
+            mux_select <= 1'b0;
         end
         else begin
-            counter <= counter + 1'b1;
+            if (mux_count == MUX_COUNT - 1) begin
+                mux_count  <= '0;
+                mux_select <= ~mux_select;
+            end
+            else begin
+                mux_count <= mux_count + 1'b1;
+            end
         end
+    end
+
+
+    //------------------------------------------------------------------
+    // Select which 4-bit input is sent to the ONE decoder
+    //------------------------------------------------------------------
+    always_comb begin
+        if (mux_select == 1'b0)
+            decoder_input = switch0;
+        else
+            decoder_input = switch1;
+    end
+
+
+    //------------------------------------------------------------------
+    // Single seven-segment decoder
+    //------------------------------------------------------------------
+    lab1_sevenseg_rk sevenseg_decoder (
+        .switch(decoder_input),
+        .segments_abc_defg(decoder_output)
+    );
+
+
+    //------------------------------------------------------------------
+    // Route decoder output to the selected display
+    //
+    // Because this is a common-anode display, the segment outputs
+    // are active-low. A value of 0 turns a segment ON.
+    //------------------------------------------------------------------
+    always_comb begin
+
+        // Default: both displays OFF
+        digit0 = 7'b111_1111;
+        digit1 = 7'b111_1111;
+
+        if (mux_select == 1'b0)
+            digit0 = decoder_output;
+        else
+            digit1 = decoder_output;
+
     end
 
 endmodule
 :::
 
-The LLM-generated code is pretty good, with the general logic in how it approaches dividing the clock signal being very similar to what I did. However, the LLM-generated code had an error in its first attempt due to using the wrong internal osciallator of SB_HFOSC instead of HSOSC. After some prompting and providing greater context, the LLM was able to generate a correct version of the code that successfully synthesized. 
-I do think its nice how throughly the LLM comments and explains the code and the calculations behind it. Therefore, given the user understands the task at hand and can provide sufficient context, the LLM can generate the code fairly succesfully and quickly. 
+The LLM-generated code is pretty good, however it did not use assign statements for things like the mux how I did. However, in theory most of the logic works the same way. Another thing it didn't do was decide when to output power as it doesn't assum the two anodes are driven to the same pin.
