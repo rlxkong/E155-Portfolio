@@ -5,7 +5,7 @@ title: "E155 Labs"
 [Lab 1 Report](labs/lab1.qmd)
 
 ## Lab 2: Multiplexed 7-Segment Display
-in progress
+[Lab 2 Report](labs/lab2.qmd)
 
 ## Lab 3: Keypad Scanner
 
