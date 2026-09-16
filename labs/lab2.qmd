@@ -87,7 +87,7 @@ Figure 8 shows the successful simulation results of the scanning module testbenc
 
 
 ## Conclusion
-The design succesfully implemented a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins and installed a keypad that logic signals can pass through. I spent a total of around 24 hours working on this lab.
+The design succesfully implemented a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins and installed a keypad that logic signals can pass through. I spent a total of around 20 hours working on this lab.
 
 ## AI Prototype Summary
 
