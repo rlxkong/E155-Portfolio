@@ -83,7 +83,7 @@ Figure 7 show the successful simulation results of the top-level module testbenc
 Figure 8 shows the successful simulation results of the scanning module testbench. The scanner is checked by verifying that all four output states are correct and reset and enable inputs work as expected.
 
 ::: {.callout-note collapse="true"}
-## Counter Module Testbench Simulation
+## Scanning Module Testbench Simulation
 ![Figure 8: Scanning module testbench waveforms](lab2_images/scanning.png)
 :::
 
