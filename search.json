@@ -193,7 +193,7 @@
     "href": "labs/lab2.html#results-and-discussion",
     "title": "Lab 2 Report",
     "section": "Results and Discussion",
-    "text": "Results and Discussion\nThe design accomplished all of the design objectives.\n\nTestbench Simulation\nFigure 7 show the successful simulation results of the top-level module testbench. This exercises the multiplexing and LED driving functionality.\n\n\n\n\n\n\nNoteTop-Level Module Testbench Simulation\n\n\n\n\n\n\n\n\nFigure 7: Top-level module testbench simulation results.\n\n\n\n\n\nFigure 8 shows the successful simulation results of the scanning module testbench. The scanner is checked by verifying that all four output states are correct and reset and enable inputs work as expected.\n\n\n\n\n\n\nNoteCounter Module Testbench Simulation\n\n\n\n\n\n\n\n\nFigure 8: Scanning module testbench waveforms"
+    "text": "Results and Discussion\nThe design accomplished all of the design objectives.\n\nTestbench Simulation\nFigure 7 show the successful simulation results of the top-level module testbench. This exercises the multiplexing and LED driving functionality.\n\n\n\n\n\n\nNoteTop-Level Module Testbench Simulation\n\n\n\n\n\n\n\n\nFigure 7: Top-level module testbench simulation results.\n\n\n\n\n\nFigure 8 shows the successful simulation results of the scanning module testbench. The scanner is checked by verifying that all four output states are correct and reset and enable inputs work as expected.\n\n\n\n\n\n\nNoteScanning Module Testbench Simulation\n\n\n\n\n\n\n\n\nFigure 8: Scanning module testbench waveforms"
   },
   {
     "objectID": "labs/lab2.html#conclusion",
