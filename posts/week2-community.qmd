@@ -1,0 +1,16 @@
+---
+title: "Week 2 Reflections"
+description: "The Power of Friendship: MicroPs Edition"
+author: "Rebecca Kong"
+date: "9/16/26"
+categories:
+  - reflection
+  - friends
+draft: false
+---
+
+## Summary
+In this lab we used SystemVerilog to implment a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins. We also got a glimpse of what is to come for Lab 3 as we instaled a keypad and implmented some logic signals which are dependent on a counter cycle and user key presses. The dual seven-segment displays were powerd by two dip switches and alternated lighting up to make both segments appear to be on at the same time. The keypad used a scanner circuit that rotated between four states and lit up LEDs based on corresponding user button presses.
+
+## Reflections on Lab
+This lab really made me understand the power of trauma bonding. The long nights grinding away in the digital lab and ECF seemed so much more fun and lively surrounded by fellow peers struggling to complete the same assignment. Being able to discuss issues we were all facing or faced, taking turns trying to debug each others code, and just bein able to celebrate whenever someone was able to accomplish a minor achievement has made the grueling task of checking off specifications so much more fun. Despite spending a lot of time struggling with the lab both in terms of comprehending the task at hand and actually implementing the features, I never thought I would get to have so many snack sessions and Jay's runs--even going as far as to learn phrases in Arabic. I fear for the next lab though...

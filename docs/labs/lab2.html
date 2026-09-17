@@ -140,6 +140,8 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#testbench-simulation" id="toc-testbench-simulation" class="nav-link" data-scroll-target="#testbench-simulation">Testbench Simulation</a></li>
   </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#ai-prototype-summary" id="toc-ai-prototype-summary" class="nav-link" data-scroll-target="#ai-prototype-summary">AI Prototype Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -299,10 +301,10 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
 <p>The design accomplished all of the design objectives.</p>
 <section id="testbench-simulation" class="level3">
-<h3 class="anchored">Testbench Simulation</h3>
+<h3 class="anchored" data-anchor-id="testbench-simulation">Testbench Simulation</h3>
 <p>Figure 6 show the successful simulation results of the top-level module testbench. This exercises the multiplexing and LED driving functionality.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -311,7 +313,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -325,9 +327,12 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Figure 7: Top-level module testbench simulation results. These tests demonstrates the end of the tests.</figcaption>
 </figure>
 </div>
+</div>
+</div>
+</div>
 <p>Figure 8 shows the successful simulation results of the scanning module testbench. The scanner is checked by verifying that all four output states are correct and reset and enable inputs work as expected.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -336,7 +341,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -344,6 +349,11 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Figure 8: Scanning module testbench waveforms</figcaption>
 </figure>
 </div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>The design succesfully implemented a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins and installed a keypad that logic signals can pass through. I spent a total of around 20 hours working on this lab.</p>
@@ -351,7 +361,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="ai-prototype-summary" class="level2">
 <h2 class="anchored" data-anchor-id="ai-prototype-summary">AI Prototype Summary</h2>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -360,7 +370,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>module seven_segment_mux ( input logic clk, input logic [3:0] digit0, input logic [3:0] digit1,</p>
 <pre><code>output logic [6:0] seg0,
@@ -427,12 +437,12 @@ always_ff @(posedge clk) begin
         seg0 &lt;= decoder_output;
 end</code></pre>
 <p>endmodule</p>
+</div>
+</div>
+</div>
 <p>This code is somewhat similar to what I wrote in terms of logic of choosing which digit to display. It also has similar segment choosing logic and works well for displaying two numbers alternating on one display.</p>
-</div>
-</div>
-</div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -441,7 +451,7 @@ end</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>// lab1_sevenseg_mux_rk.sv // Rebecca Kong // // Time-multiplexes one seven-segment decoder between two // 4-bit inputs. The decoder drives a common-anode display, // so the segment outputs are active-low. // // digit0 and digit1 are the two sets of seven segment outputs. // Only one set is enabled at a time, but switching occurs // rapidly enough that both displays appear continuously lit.</p>
 <p>module lab1_sevenseg_mux_rk #( parameter integer MUX_COUNT = 10000 ) ( input logic reset, input logic [3:0] switch0, input logic [3:0] switch1,</p>
@@ -540,14 +550,6 @@ end</code></pre>
 <p>The LLM-generated code is pretty good, however it did not use assign statements for things like the mux how I did. However, in theory most of the logic works the same way. Another thing it didn’t do was decide when to output power as it doesn’t assum the two anodes are driven to the same pin.</p>
 
 
-</section>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
 </section>
 
 </main> <!-- /main -->
