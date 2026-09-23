@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Rebecca Kong">
+<meta name="dcterms.date" content="2026-09-23">
+
+<title>Lab 3 Report – E155 Portfolio</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">E155 Portfolio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../labs.html"> 
+<span class="menu-text">Labs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#design-and-testing-methodology" id="toc-design-and-testing-methodology" class="nav-link" data-scroll-target="#design-and-testing-methodology">Design and Testing Methodology</a></li>
+  <li><a href="#technical-documentation" id="toc-technical-documentation" class="nav-link" data-scroll-target="#technical-documentation">Technical Documentation</a>
+  <ul class="collapse">
+  <li><a href="#block-diagram" id="toc-block-diagram" class="nav-link" data-scroll-target="#block-diagram">Block Diagram</a></li>
+  <li><a href="#schematic" id="toc-schematic" class="nav-link" data-scroll-target="#schematic">Schematic</a></li>
+  </ul></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a>
+  <ul class="collapse">
+  <li><a href="#testbench-simulation" id="toc-testbench-simulation" class="nav-link" data-scroll-target="#testbench-simulation">Testbench Simulation</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#ai-prototype-summary" id="toc-ai-prototype-summary" class="nav-link" data-scroll-target="#ai-prototype-summary">AI Prototype Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab 3 Report</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Rebecca Kong </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 23, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this lab, SystemVerilog was used to implement a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins and a keypad was installed with specified logic signals. The seven-segment displays were powered by two dip switches and a alternating flashing frequency that made both segments appear to be on at the same time. The keyboard used a scanner circuit that rotated between four states and lit up leds based on corresponding button presses.</p>
+</section>
+<section id="design-and-testing-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="design-and-testing-methodology">Design and Testing Methodology</h2>
+<section id="dual-seven-segment-implementation" class="level4">
+<h4 class="anchored" data-anchor-id="dual-seven-segment-implementation">Dual Seven-Segment Implementation</h4>
+<p>Our goal was to display two independent hexadecimal numbers on our dual seven-segment displays at the same time while only using one seven-segment decoder module to drive the cathodes of both displays.</p>
+<p>Essentially, we had to find a way to drive the two different switch inputs into the two different segmenets in a way that alternates between the two fast enough to make the display appear to have both numbers on at the same time. To ensure enough power was supplied to a given anode, we used 3N3906 PNP transistors to ensure a large enough current was driven to the annode. Based on these expected current we preformed some PNP transistor calculations</p>
+<p>Previous submodules counter and seven-segment display (which outputs the corresponding segments based on switch input) were used. The 48MHz HSOSC clock was lowered to 120Hz, fast enough to trick the human eye but slow enough so the segmenets didn’t bleed, and the seven-segment submodule was used to output the correct hex digits to the displays. This clock determined both which anode would be powered between the two segments as well as which seven-segment logic to display through the use of a multiplexer.</p>
+</section>
+<section id="x4-keyboard-implementation" class="level4">
+<h4 class="anchored" data-anchor-id="x4-keyboard-implementation">4x4 Keyboard Implementation</h4>
+<p>A new module known as the scanning module was created to scan through the rows of the keyboard by parsing through different states (each setting a specific row to high). These row outputs were checked based on this scanning module. In the top module, the button pushing logic and corresponding led response was implemented. All the columns were set to be high through pull up resistors, where when a row was high and a button was pushed at the same time, this would pull the column to low–through the use of a NPN 2N30903 transistor, making it so that when a row was high and a column was low at the same time, it indicates a button was pressed. This button input was then connected to an LED to display the pressing mechanism between columns as the scanner module scanned through the rows. There was also enable and reset input implemented into the code.</p>
+<p>These two features were built on seperate breadboards with seperate pin assigmenents as the limited pins on the FPGA did not allow for both features to be displayed at once.</p>
+</section>
+<section id="testbench-design" class="level4">
+<h4 class="anchored" data-anchor-id="testbench-design">Testbench Design</h4>
+<p>Testbenches were created for each of the three modules to verify that the design was functioning as expected. The submodule testbenches used assertions to check that the output of each module matched the expected output for a given input with the 7-segment module covering all input-output pairs and the counter showing that reset, enable, and max count features all worked correctly. The top level module testbench was used to verify that the submodules were connected correctly, the HSOSC worked, and that the switch-to-LED logic was functioning as expected.</p>
+</section>
+<section id="hardware-testing" class="level4">
+<h4 class="anchored" data-anchor-id="hardware-testing">Hardware Testing</h4>
+<p>The dual 7-segment display circuit was built and assigned GPIO pins that were connected to a corresponding keypad.</p>
+</section>
+</section>
+<section id="technical-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation</h2>
+<p>The source code for the project can be found in the associated <a href="https://github.com/rlxkong/E155-Lab3/tree/main/fpga">GitHub repository</a>.</p>
+<section id="block-diagram" class="level3">
+<h3 class="anchored" data-anchor-id="block-diagram">Block Diagram</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Block Diagram
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab3_images/top_diagram.JPG" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: Block Diagram of the top module</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>The block diagram in Figure 1 demonstrates the overall architecture of the design. The top-level module with the logic that connects all the submodules.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>FSM
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><img src="lab3_images/main_draw_fsm.JPG" class="img-fluid" alt="MainFSM"> <img src="lab3_images/debouncefsm.JPG" class="img-fluid" alt="Debouncer"></p>
+</div>
+</div>
+</div>
+<p>These are the FSMs.</p>
+</section>
+<section id="schematic" class="level3">
+<h3 class="anchored" data-anchor-id="schematic">Schematic</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Schematic
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab3_images/shcematic.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 2: Schematic of the dual seven-segment physical circuit controlled by the keypad</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Figure 2 shows the schematic of the dual 7-segment physical circuit. The dual 7-segment display is connected to the labeled GPIO pins through a current-limiting resistor and powered through PNP transistors from the FPGA 3.3V supply.</p>
+</section>
+</section>
+<section id="results-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
+<p>The design accomplished all of the design objectives.</p>
+<section id="testbench-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="testbench-simulation">Testbench Simulation</h3>
+<p>Figure 3 show the successful simulation results of the top-level module testbench. This exercises the multiplexing and LED driving functionality.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Top-Level Module Testbench Simulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><img src="lab3_images/top_test.png" class="img-fluid" alt="Figure 3: Top-level module testbench simulation results."> <img src="lab3_images/debounce_connect_top.png" class="img-fluid" alt="Top-level debouncing module testbench simulation results."></p>
+</div>
+</div>
+</div>
+<p>Figure 4 shows the successful simulation results of the scanning module testbench. The scanner is checked by verifying that all four output states are correct and reset and enable inputs work as expected. This is rechecked as I parameterized it this lab.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Scanning Module Testbench Simulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab3_images/scanner.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 4: Scanning module testbench waveforms</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Figure 5 shows the successful simulation results of the synchronizer.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Synchronizer Module Testbench Simulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab3_images/sync_wave.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 5: Synchronizer module testbench waveforms</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Figure 6 shows the successful simulation results of the debouncing module testbench.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Debouncing Module Testbench Simulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><img src="lab3_images/pressed_change_reset_validation.png" class="img-fluid" alt="Figure 6: Debouncing module testbench waveforms"> <img src="lab3_images/idle_wait_validation.jpg" class="img-fluid" alt="Figure 7: Idle and wait validation of debouncing module"></p>
+</div>
+</div>
+</div>
+<p>Figure 8 shows the successful simulation results of the keypress module testbench.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Keypress Module Testbench Simulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab3_images/keypress.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 8: Keypress module testbench waveforms</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Figure 9 shows the successful simulation results of the mainfsm module testbench.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>MainFSM Module Testbench Simulation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab3_images/mainfsm.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 9: MainFSM module testbench waveforms</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The design succesfully implemented a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins and installed a keypad that commands it. I spent a total of around 60 hours working on this lab.</p>
+</section>
+<section id="ai-prototype-summary" class="level2">
+<h2 class="anchored" data-anchor-id="ai-prototype-summary">AI Prototype Summary</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>ChatGPT Generated Code Prompt 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>module keypad_scanner #( parameter integer CLK_HZ = 20_000_000, parameter integer SCAN_HZ = 1000 ) ( input logic clk, input logic reset,</p>
+<pre><code>// Keypad interface
+// Columns are driven active-low.
+output logic [3:0] col,
+
+// Rows are read active-low.
+input  logic [3:0] row,
+
+// Key status and decoded key
+output logic       key_pressed,
+output logic [3:0] key_code</code></pre>
+<p>);</p>
+<pre><code>//----------------------------------------------------------------------
+// Clock divider
+//
+// Generates a scan tick at approximately SCAN_HZ.
+//----------------------------------------------------------------------
+localparam integer DIVIDER =
+    (CLK_HZ / SCAN_HZ);
+
+localparam integer DIV_WIDTH =
+    (DIVIDER &lt;= 2) ? 1 : $clog2(DIVIDER);
+
+logic [DIV_WIDTH-1:0] div_count;
+logic                 scan_tick;
+
+always_ff @(posedge clk) begin
+    if (reset) begin
+        div_count &lt;= '0;
+        scan_tick &lt;= 1'b0;
+    end
+    else begin
+        scan_tick &lt;= 1'b0;
+
+        if (div_count == DIVIDER - 1) begin
+            div_count &lt;= '0;
+            scan_tick &lt;= 1'b1;
+        end
+        else begin
+            div_count &lt;= div_count + 1'b1;
+        end
+    end
+end
+
+//----------------------------------------------------------------------
+// Scanner FSM
+//
+// DRIVE state:
+//   Select one column.
+//
+// SAMPLE state:
+//   Read the rows after the column has been driven for one scan tick.
+//
+// HOLD state:
+//   A key has been detected. Continue scanning, but do not register
+//   another key until all rows are released.
+//----------------------------------------------------------------------
+typedef enum logic [1:0] {
+    ST_DRIVE,
+    ST_SAMPLE,
+    ST_HOLD
+} state_t;
+
+state_t state;
+
+logic [1:0] column_index;
+
+//----------------------------------------------------------------------
+// Temporary debounce/confirmation information.
+//
+// A candidate must be observed on two consecutive complete scans before
+// key_pressed is asserted. This provides basic debounce protection.
+//----------------------------------------------------------------------
+logic       candidate_valid;
+logic [3:0] candidate_code;
+
+logic [3:0] sampled_code;
+logic       sampled_valid;
+
+//----------------------------------------------------------------------
+// Decode the currently selected column and active-low row inputs.
+//
+// Only the first active row is used. This intentionally treats the
+// keypad as a single-key-at-a-time interface.
+//----------------------------------------------------------------------
+always_comb begin
+    sampled_valid = 1'b0;
+    sampled_code  = 4'h0;
+
+    case (column_index)
+
+        2'd0: begin
+            if (!row[0]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h1;
+            end
+            else if (!row[1]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h4;
+            end
+            else if (!row[2]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h7;
+            end
+            else if (!row[3]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'hE;   // *
+            end
+        end
+
+        2'd1: begin
+            if (!row[0]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h2;
+            end
+            else if (!row[1]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h5;
+            end
+            else if (!row[2]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h8;
+            end
+            else if (!row[3]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h0;
+            end
+        end
+
+        2'd2: begin
+            if (!row[0]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h3;
+            end
+            else if (!row[1]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h6;
+            end
+            else if (!row[2]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h9;
+            end
+            else if (!row[3]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'hF;   // #
+            end
+        end
+
+        2'd3: begin
+            if (!row[0]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'hA;
+            end
+            else if (!row[1]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'hB;
+            end
+            else if (!row[2]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'hC;
+            end
+            else if (!row[3]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'hD;
+            end
+        end
+
+        default: begin
+            sampled_valid = 1'b0;
+            sampled_code  = 4'h0;
+        end
+
+    endcase
+end
+
+//----------------------------------------------------------------------
+// Column driver
+//
+// Exactly one column is asserted low.
+//----------------------------------------------------------------------
+always_comb begin
+    case (column_index)
+        2'd0: col = 4'b1110;
+        2'd1: col = 4'b1101;
+        2'd2: col = 4'b1011;
+        2'd3: col = 4'b0111;
+
+        default: col = 4'b1111;
+    endcase
+end
+
+//----------------------------------------------------------------------
+// Main scanner FSM
+//----------------------------------------------------------------------
+always_ff @(posedge clk) begin
+    if (reset) begin
+        state          &lt;= ST_DRIVE;
+        column_index   &lt;= 2'd0;
+
+        candidate_valid &lt;= 1'b0;
+        candidate_code  &lt;= 4'h0;
+
+        key_pressed     &lt;= 1'b0;
+        key_code        &lt;= 4'h0;
+    end
+    else if (scan_tick) begin
+
+        case (state)
+
+            //----------------------------------------------------------
+            // Drive a column, then wait for the next scan tick.
+            //----------------------------------------------------------
+            ST_DRIVE: begin
+                state &lt;= ST_SAMPLE;
+            end
+
+            //----------------------------------------------------------
+            // Sample the rows for the currently active column.
+            //----------------------------------------------------------
+            ST_SAMPLE: begin
+
+                if (sampled_valid) begin
+
+                    // First observation of a key.
+                    if (!candidate_valid) begin
+                        candidate_valid &lt;= 1'b1;
+                        candidate_code  &lt;= sampled_code;
+                    end
+
+                    // Same key observed again: accept it.
+                    else if (candidate_code == sampled_code) begin
+                        key_pressed &lt;= 1'b1;
+                        key_code    &lt;= sampled_code;
+
+                        state &lt;= ST_HOLD;
+                    end
+
+                    // Different key: restart debounce.
+                    else begin
+                        candidate_valid &lt;= 1'b1;
+                        candidate_code  &lt;= sampled_code;
+                    end
+
+                end
+                else begin
+                    // No key in this column.
+                    //
+                    // Continue scanning the remaining columns.
+                    candidate_valid &lt;= 1'b0;
+
+                    if (column_index == 2'd3) begin
+                        column_index &lt;= 2'd0;
+                    end
+                    else begin
+                        column_index &lt;= column_index + 1'b1;
+                    end
+                end
+
+                // If the current column produced a key, remain on it
+                // for confirmation on the next scan tick.
+                if (sampled_valid) begin
+                    state &lt;= ST_SAMPLE;
+                end
+                else begin
+                    state &lt;= ST_DRIVE;
+                end
+            end
+
+            //----------------------------------------------------------
+            // A key is being held.
+            //
+            // Do not accept another key until the keypad is completely
+            // released.
+            //----------------------------------------------------------
+            ST_HOLD: begin
+
+                if (!sampled_valid) begin
+                    // This column is released. Continue through the
+                    // remaining columns to make sure no other key is
+                    // still pressed.
+                    if (column_index == 2'd3) begin
+                        key_pressed    &lt;= 1'b0;
+                        candidate_valid &lt;= 1'b0;
+                        column_index   &lt;= 2'd0;
+                        state          &lt;= ST_DRIVE;
+                    end
+                    else begin
+                        column_index &lt;= column_index + 1'b1;
+                        state        &lt;= ST_DRIVE;
+                    end
+                end
+                else begin
+                    // Key is still being held.
+                    state &lt;= ST_HOLD;
+                end
+            end
+
+            default: begin
+                state &lt;= ST_DRIVE;
+            end
+
+        endcase
+    end
+end</code></pre>
+<p>endmodule</p>
+</div>
+</div>
+</div>
+<p>This code sythesized.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>ChatGPT Generated Code Prompt 2 (Parts a,b,c)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>module keypad_key_register ( input logic clk, input logic reset,</p>
+<pre><code>input  logic       key_valid,   // 1 = stable key is currently pressed
+input  logic [3:0] key_code,    // hexadecimal key code
+
+output logic [3:0] registered_key,
+output logic       new_key      // one-clock-cycle pulse</code></pre>
+<p>);</p>
+<pre><code>typedef enum logic [1:0] {
+    IDLE,        // Waiting for a key press
+    REGISTER,    // Register the detected key
+    WAIT_RELEASE // Ignore input until all keys are released
+} state_t;
+
+state_t state;
+
+always_ff @(posedge clk) begin
+    if (reset) begin
+        state          &lt;= IDLE;
+        registered_key &lt;= 4'h0;
+        new_key        &lt;= 1'b0;
+    end
+    else begin
+        // Default: new_key is normally inactive.
+        new_key &lt;= 1'b0;
+
+        case (state)
+
+            IDLE: begin
+                if (key_valid) begin
+                    state &lt;= REGISTER;
+                end
+            end
+
+            REGISTER: begin
+                // Capture the key exactly once.
+                registered_key &lt;= key_code;
+                new_key        &lt;= 1'b1;
+
+                // Do not accept another key until release.
+                state &lt;= WAIT_RELEASE;
+            end
+
+            WAIT_RELEASE: begin
+                if (!key_valid) begin
+                    state &lt;= IDLE;
+                end
+            end
+
+            default: begin
+                state &lt;= IDLE;
+            end
+
+        endcase
+    end
+end</code></pre>
+<p>endmodule</p>
+<p>module keypad_scanner #( parameter integer CLK_HZ = 20_000_000, parameter integer SCAN_HZ = 1000 ) ( input logic clk, input logic reset,</p>
+<pre><code>// Keypad interface
+// Columns are driven active-low.
+output logic [3:0] col,
+
+// Rows are read active-low.
+input  logic [3:0] row,
+
+// Key status and decoded key
+output logic       key_pressed,
+output logic [3:0] key_code</code></pre>
+<p>);</p>
+<pre><code>//----------------------------------------------------------------------
+// Clock divider
+//
+// Generates a scan tick at approximately SCAN_HZ.
+//----------------------------------------------------------------------
+localparam integer DIVIDER =
+    (CLK_HZ / SCAN_HZ);
+
+localparam integer DIV_WIDTH =
+    (DIVIDER &lt;= 2) ? 1 : $clog2(DIVIDER);
+
+logic [DIV_WIDTH-1:0] div_count;
+logic                 scan_tick;
+
+always_ff @(posedge clk) begin
+    if (reset) begin
+        div_count &lt;= '0;
+        scan_tick &lt;= 1'b0;
+    end
+    else begin
+        scan_tick &lt;= 1'b0;
+
+        if (div_count == DIVIDER - 1) begin
+            div_count &lt;= '0;
+            scan_tick &lt;= 1'b1;
+        end
+        else begin
+            div_count &lt;= div_count + 1'b1;
+        end
+    end
+end
+
+//----------------------------------------------------------------------
+// Scanner FSM
+//
+// DRIVE state:
+//   Select one column.
+//
+// SAMPLE state:
+//   Read the rows after the column has been driven for one scan tick.
+//
+// HOLD state:
+//   A key has been detected. Continue scanning, but do not register
+//   another key until all rows are released.
+//----------------------------------------------------------------------
+typedef enum logic [1:0] {
+    ST_DRIVE,
+    ST_SAMPLE,
+    ST_HOLD
+} state_t;
+
+state_t state;
+
+logic [1:0] column_index;
+
+//----------------------------------------------------------------------
+// Temporary debounce/confirmation information.
+//
+// A candidate must be observed on two consecutive complete scans before
+// key_pressed is asserted. This provides basic debounce protection.
+//----------------------------------------------------------------------
+logic       candidate_valid;
+logic [3:0] candidate_code;
+
+logic [3:0] sampled_code;
+logic       sampled_valid;
+
+//----------------------------------------------------------------------
+// Decode the currently selected column and active-low row inputs.
+//
+// Only the first active row is used. This intentionally treats the
+// keypad as a single-key-at-a-time interface.
+//----------------------------------------------------------------------
+always_comb begin
+    sampled_valid = 1'b0;
+    sampled_code  = 4'h0;
+
+    case (column_index)
+
+        2'd0: begin
+            if (!row[0]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h1;
+            end
+            else if (!row[1]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h4;
+            end
+            else if (!row[2]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h7;
+            end
+            else if (!row[3]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'hE;   // *
+            end
+        end
+
+        2'd1: begin
+            if (!row[0]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h2;
+            end
+            else if (!row[1]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h5;
+            end
+            else if (!row[2]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h8;
+            end
+            else if (!row[3]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h0;
+            end
+        end
+
+        2'd2: begin
+            if (!row[0]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h3;
+            end
+            else if (!row[1]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h6;
+            end
+            else if (!row[2]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'h9;
+            end
+            else if (!row[3]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'hF;   // #
+            end
+        end
+
+        2'd3: begin
+            if (!row[0]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'hA;
+            end
+            else if (!row[1]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'hB;
+            end
+            else if (!row[2]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'hC;
+            end
+            else if (!row[3]) begin
+                sampled_valid = 1'b1;
+                sampled_code  = 4'hD;
+            end
+        end
+
+        default: begin
+            sampled_valid = 1'b0;
+            sampled_code  = 4'h0;
+        end
+
+    endcase
+end
+
+//----------------------------------------------------------------------
+// Column driver
+//
+// Exactly one column is asserted low.
+//----------------------------------------------------------------------
+always_comb begin
+    case (column_index)
+        2'd0: col = 4'b1110;
+        2'd1: col = 4'b1101;
+        2'd2: col = 4'b1011;
+        2'd3: col = 4'b0111;
+
+        default: col = 4'b1111;
+    endcase
+end
+
+//----------------------------------------------------------------------
+// Main scanner FSM
+//----------------------------------------------------------------------
+always_ff @(posedge clk) begin
+    if (reset) begin
+        state          &lt;= ST_DRIVE;
+        column_index   &lt;= 2'd0;
+
+        candidate_valid &lt;= 1'b0;
+        candidate_code  &lt;= 4'h0;
+
+        key_pressed     &lt;= 1'b0;
+        key_code        &lt;= 4'h0;
+    end
+    else if (scan_tick) begin
+
+        case (state)
+
+            //----------------------------------------------------------
+            // Drive a column, then wait for the next scan tick.
+            //----------------------------------------------------------
+            ST_DRIVE: begin
+                state &lt;= ST_SAMPLE;
+            end
+
+            //----------------------------------------------------------
+            // Sample the rows for the currently active column.
+            //----------------------------------------------------------
+            ST_SAMPLE: begin
+
+                if (sampled_valid) begin
+
+                    // First observation of a key.
+                    if (!candidate_valid) begin
+                        candidate_valid &lt;= 1'b1;
+                        candidate_code  &lt;= sampled_code;
+                    end
+
+                    // Same key observed again: accept it.
+                    else if (candidate_code == sampled_code) begin
+                        key_pressed &lt;= 1'b1;
+                        key_code    &lt;= sampled_code;
+
+                        state &lt;= ST_HOLD;
+                    end
+
+                    // Different key: restart debounce.
+                    else begin
+                        candidate_valid &lt;= 1'b1;
+                        candidate_code  &lt;= sampled_code;
+                    end
+
+                end
+                else begin
+                    // No key in this column.
+                    //
+                    // Continue scanning the remaining columns.
+                    candidate_valid &lt;= 1'b0;
+
+                    if (column_index == 2'd3) begin
+                        column_index &lt;= 2'd0;
+                    end
+                    else begin
+                        column_index &lt;= column_index + 1'b1;
+                    end
+                end
+
+                // If the current column produced a key, remain on it
+                // for confirmation on the next scan tick.
+                if (sampled_valid) begin
+                    state &lt;= ST_SAMPLE;
+                end
+                else begin
+                    state &lt;= ST_DRIVE;
+                end
+            end
+
+            //----------------------------------------------------------
+            // A key is being held.
+            //
+            // Do not accept another key until the keypad is completely
+            // released.
+            //----------------------------------------------------------
+            ST_HOLD: begin
+
+                if (!sampled_valid) begin
+                    // This column is released. Continue through the
+                    // remaining columns to make sure no other key is
+                    // still pressed.
+                    if (column_index == 2'd3) begin
+                        key_pressed    &lt;= 1'b0;
+                        candidate_valid &lt;= 1'b0;
+                        column_index   &lt;= 2'd0;
+                        state          &lt;= ST_DRIVE;
+                    end
+                    else begin
+                        column_index &lt;= column_index + 1'b1;
+                        state        &lt;= ST_DRIVE;
+                    end
+                end
+                else begin
+                    // Key is still being held.
+                    state &lt;= ST_HOLD;
+                end
+            end
+
+            default: begin
+                state &lt;= ST_DRIVE;
+            end
+
+        endcase
+    end
+end</code></pre>
+<p>endmodule</p>
+<p>module keypad_top #( parameter integer CLK_HZ = 20_000_000 ) ( input logic reset,</p>
+<pre><code>// 4x4 keypad
+input  logic [3:0] row,
+output logic [3:0] col,
+
+// Two-digit seven-segment display
+output logic [6:0] seg,
+output logic [1:0] digit_en</code></pre>
+<p>);</p>
+<pre><code>//----------------------------------------------------------------------
+// Internal oscillator
+//
+// For the iCE40 UP5K, the internal high-frequency oscillator can be
+// instantiated using SB_HFOSC. The exact primitive parameters can be
+// adjusted for the desired oscillator frequency.
+//----------------------------------------------------------------------
+logic clk;
+
+SB_HFOSC #(
+    .CLKHF_DIV("0")
+) hfosc_inst (
+    .CLKHFPU(1'b1),
+    .CLKHFEN(1'b1),
+    .CLKHF(clk)
+);
+
+//----------------------------------------------------------------------
+// Keypad scanner
+//----------------------------------------------------------------------
+logic       key_pressed;
+logic [3:0] key_code;
+
+keypad_scanner #(
+    .CLK_HZ  (CLK_HZ),
+    .SCAN_HZ (1000)
+) scanner_inst (
+    .clk         (clk),
+    .reset       (reset),
+
+    .col         (col),
+    .row         (row),
+
+    .key_pressed (key_pressed),
+    .key_code    (key_code)
+);
+
+//----------------------------------------------------------------------
+// One-shot key registration
+//----------------------------------------------------------------------
+logic       new_key;
+logic [3:0] registered_key;
+
+keypad_key_register key_register_inst (
+    .clk            (clk),
+    .reset          (reset),
+
+    .key_valid      (key_pressed),
+    .key_code       (key_code),
+
+    .registered_key (registered_key),
+    .new_key        (new_key)
+);
+
+//----------------------------------------------------------------------
+// Two-key history
+//
+// older_key       &lt;= previous most-recent key
+// most_recent_key &lt;= newly registered key
+//
+// The display is changed ONLY when new_key is asserted.
+//----------------------------------------------------------------------
+logic [3:0] older_key;
+logic [3:0] most_recent_key;
+
+always_ff @(posedge clk) begin
+    if (reset) begin
+        older_key       &lt;= 4'h0;
+        most_recent_key &lt;= 4'h0;
+    end
+    else if (new_key) begin
+        older_key       &lt;= most_recent_key;
+        most_recent_key &lt;= registered_key;
+    end
+end
+
+//----------------------------------------------------------------------
+// Seven-segment decoder
+//
+// One decoder is shared between the two digits.
+//----------------------------------------------------------------------
+logic [6:0] decoded_segments;
+logic [3:0] selected_digit;
+
+sevenSegment seven_segment_inst (
+    .digit    (selected_digit),
+    .segments (decoded_segments)
+);
+
+//----------------------------------------------------------------------
+// Display multiplexing clock enable
+//
+// 1 kHz digit switching means:
+//
+//       digit 0 -&gt; 1 ms
+//       digit 1 -&gt; 1 ms
+//
+// giving approximately 500 Hz complete-display refresh.
+//----------------------------------------------------------------------
+localparam integer MUX_HZ = 1000;
+
+localparam integer MUX_DIV =
+    CLK_HZ / MUX_HZ;
+
+localparam integer MUX_WIDTH =
+    (MUX_DIV &lt;= 2) ? 1 : $clog2(MUX_DIV);
+
+logic [MUX_WIDTH-1:0] mux_count;
+logic                 mux_tick;
+logic                 mux_select;
+
+always_ff @(posedge clk) begin
+    if (reset) begin
+        mux_count  &lt;= '0;
+        mux_tick   &lt;= 1'b0;
+    end
+    else begin
+        mux_tick &lt;= 1'b0;
+
+        if (mux_count == MUX_DIV - 1) begin
+            mux_count &lt;= '0;
+            mux_tick  &lt;= 1'b1;
+        end
+        else begin
+            mux_count &lt;= mux_count + 1'b1;
+        end
+    end
+end
+
+//----------------------------------------------------------------------
+// Digit selection
+//----------------------------------------------------------------------
+always_ff @(posedge clk) begin
+    if (reset) begin
+        mux_select &lt;= 1'b0;
+    end
+    else if (mux_tick) begin
+        mux_select &lt;= ~mux_select;
+    end
+end
+
+//----------------------------------------------------------------------
+// Select which key is sent to the seven-segment decoder.
+//
+// mux_select = 0 -&gt; older key
+// mux_select = 1 -&gt; most recent key
+//----------------------------------------------------------------------
+always_comb begin
+    if (mux_select == 1'b0) begin
+        selected_digit = older_key;
+    end
+    else begin
+        selected_digit = most_recent_key;
+    end
+end
+
+//----------------------------------------------------------------------
+// Seven-segment outputs
+//
+// Assumes an ACTIVE-LOW two-digit common-anode display:
+//
+//   digit_en[0] = left/older digit
+//   digit_en[1] = right/most-recent digit
+//----------------------------------------------------------------------
+always_comb begin
+    seg = decoded_segments;
+
+    if (mux_select == 1'b0) begin
+        digit_en = 2'b10;     // enable older/left digit
+    end
+    else begin
+        digit_en = 2'b01;     // enable recent/right digit
+    end
+end</code></pre>
+<p>endmodule</p>
+</div>
+</div>
+</div>
+<p>The LLM-generated code all synthesized.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/rlxkong\.github\.io\/E155-Portfolio\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
