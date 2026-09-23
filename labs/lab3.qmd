@@ -5,7 +5,7 @@ date: "9/23/26"
 draft: false
 ---
 ## Introduction
-In this lab, SystemVerilog was used to implement a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins and a keypad was installed with specified logic signals. The seven-segment displays were powered by two dip switches and a alternating flashing frequency that made both segments appear to be on at the same time. The keyboard used a scanner circuit that rotated between four states and lit up leds based on corresponding button presses.
+In this lab, SystemVerilog was used to implement a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins and a keypad was installed that controls the segment displays. The keyboard used a scanner circuit that rotated between four states and take in column inputs.
 
 ## Design and Testing Methodology
 #### Dual Seven-Segment Implementation
@@ -46,7 +46,9 @@ The block diagram in Figure 1 demonstrates the overall architecture of the desig
 ## FSM
 
 ![MainFSM](lab3_images/main_draw_fsm.JPG)
-![Debouncer](lab3_images/debouncefsm.JPG)
+
+![Debouncer](lab3_images/debouncefsm.PNG)
+
 :::
 These are the FSMs.
 
@@ -55,7 +57,7 @@ These are the FSMs.
 ::: {.callout-note collapse="true"}
 ## Schematic
 
-![Figure 2: Schematic of the dual seven-segment physical circuit controlled by the keypad](lab3_images/schematic.png)
+![Figure 2: Schematic of the dual seven-segment physical circuit controlled by the keypad](lab3_images/schematic.PNG)
 :::
 Figure 2 shows the schematic of the dual 7-segment physical circuit. The dual 7-segment display is connected to the labeled GPIO pins through a current-limiting resistor and powered through PNP transistors from the FPGA 3.3V supply.
 
