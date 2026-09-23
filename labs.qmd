@@ -8,6 +8,7 @@ title: "E155 Labs"
 [Lab 2 Report](labs/lab2.qmd)
 
 ## Lab 3: Keypad Scanner
+[Lab 3 Report](labs/lab3.qmd)
 
 ## Lab 4: Digital Audio
 
