@@ -56,8 +56,8 @@ These are the FSMs.
 ### Schematic
 ::: {.callout-note collapse="true"}
 ## Schematic
+![Schematic](lab3_images/schematic.PNG)
 
-![Figure 2: Schematic of the dual seven-segment physical circuit controlled by the keypad](lab3_images/schematic.PNG)
 :::
 Figure 2 shows the schematic of the dual 7-segment physical circuit. The dual 7-segment display is connected to the labeled GPIO pins through a current-limiting resistor and powered through PNP transistors from the FPGA 3.3V supply.
 
