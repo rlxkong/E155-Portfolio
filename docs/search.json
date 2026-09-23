@@ -249,7 +249,7 @@
     "href": "labs/lab3.html#conclusion",
     "title": "Lab 3 Report",
     "section": "Conclusion",
-    "text": "Conclusion\nThe design succesfully implemented a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins and installed a keypad that commands it. I spent a total of around 60 hours working on this lab."
+    "text": "Conclusion\nThe design succesfully implemented a time-multiplexing scheme to drive two seven-segment displays with a single set of FPGA I/O pins and installed a keypad that commands it. I spent a total of around 60-70 hours working on this lab."
   },
   {
     "objectID": "labs/lab3.html#ai-prototype-summary",
