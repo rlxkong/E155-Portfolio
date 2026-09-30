@@ -11,6 +11,7 @@ title: "E155 Labs"
 [Lab 3 Report](labs/lab3.qmd)
 
 ## Lab 4: Digital Audio
+[Lab 4 Report](labs/lab4.qmd)
 
 ## Lab 5: Interrupts
 
