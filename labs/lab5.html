@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Rebecca Kong">
-<meta name="dcterms.date" content="2026-09-08">
+<meta name="dcterms.date" content="2026-10-07">
 
-<title>Lab 1 Report – E155 Portfolio</title>
+<title>Lab 5 Report – E155 Portfolio</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -130,15 +130,18 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#design-and-testing-methodology" id="toc-design-and-testing-methodology" class="nav-link" data-scroll-target="#design-and-testing-methodology">Design and Testing Methodology</a></li>
+  <li><a href="#design-and-testing-methodology" id="toc-design-and-testing-methodology" class="nav-link" data-scroll-target="#design-and-testing-methodology">Design and Testing Methodology</a>
+  <ul class="collapse">
+  <li><a href="#speed-logic" id="toc-speed-logic" class="nav-link" data-scroll-target="#speed-logic">Speed Logic</a></li>
+  <li><a href="#direction-logic" id="toc-direction-logic" class="nav-link" data-scroll-target="#direction-logic">Direction Logic</a></li>
+  </ul></li>
   <li><a href="#technical-documentation" id="toc-technical-documentation" class="nav-link" data-scroll-target="#technical-documentation">Technical Documentation</a>
   <ul class="collapse">
-  <li><a href="#block-diagram" id="toc-block-diagram" class="nav-link" data-scroll-target="#block-diagram">Block Diagram</a></li>
   <li><a href="#schematic" id="toc-schematic" class="nav-link" data-scroll-target="#schematic">Schematic</a></li>
   </ul></li>
   <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a>
   <ul class="collapse">
-  <li><a href="#testbench-simulation" id="toc-testbench-simulation" class="nav-link" data-scroll-target="#testbench-simulation">Testbench Simulation</a></li>
+  <li><a href="#polling-vs.-interrupting" id="toc-polling-vs.-interrupting" class="nav-link" data-scroll-target="#polling-vs.-interrupting">Polling vs.&nbsp;Interrupting</a></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#ai-prototype-summary" id="toc-ai-prototype-summary" class="nav-link" data-scroll-target="#ai-prototype-summary">AI Prototype Summary</a></li>
@@ -150,7 +153,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 1 Report</h1>
+<h1 class="title">Lab 5 Report</h1>
 </div>
 
 
@@ -167,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 8, 2026</p>
+      <p class="date">October 7, 2026</p>
     </div>
   </div>
   
@@ -181,27 +184,56 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In this lab, a development board was built and programmed using SystemVerilog. This lab focused on using SystemVerilog to program the FPGA using switches, LEDs, and a seven-segment display. The goals were to test out the assembled development board, practice programming in SystemVerilog, and to gain experience in building, assembling, testing, and debugging circuits.</p>
+<p>In this lab, we used interupts on our MCU to collect speed and direction of a turning motor based on quadrature encoder outputs. This information was then displayed to the user via printf statements.</p>
 </section>
 <section id="design-and-testing-methodology" class="level2">
 <h2 class="anchored" data-anchor-id="design-and-testing-methodology">Design and Testing Methodology</h2>
-<section id="development-board-assembly" class="level4">
-<h4 class="anchored" data-anchor-id="development-board-assembly">Development Board Assembly</h4>
-<p>The development board was assembled according to the instructions provided in the lab manual as well as in reference to the <a href="https://hmc-e155.github.io/assets/doc/E155_v4_Dev_Board_BOM.html">E155 Development Board BOM</a>. The board was then tested using the provided test programs.</p>
+<p>This lab utalized a quadrature encoder to output signals that were used to detect the speed and direction of a motor. It has two stationary sensors that are 90 degrees out of phase which outputs pulses based on a magnetized disc.</p>
+<p>Therefore, since we want an “update” everytime the sensors pulse, we use interupts. The interrupt design can be referenced from the flow chart in Figure 1 below.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab5_images/flowchart.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: Interrupt Design Flowchart</figcaption>
+</figure>
+</div>
+<p>Figure 1: A flowchart to visualize the interrupt logic.</p>
+<section id="speed-logic" class="level3">
+<h3 class="anchored" data-anchor-id="speed-logic">Speed Logic</h3>
+<p>Since we know that out motors have 408 pulses per rotation, we were able to calculate the speed of our motor in revolutions per second by utalizing timer counts and number of pulses.</p>
+<p>We have our timer running so that it runs at 10 kHz and counts till one second. We also trigger an interrupt every rising and falling edge of encoder A and encoder B. Therefore, we can calculate the speed as shown below in Figure 2. We have the count reset every second so that we can get the speed per a second.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab5_images/speed.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2: Speed Calculations</figcaption>
+</figure>
+</div>
+<p>Figure 2: Calculations to solve for motor speed.</p>
 </section>
-<section id="fpga-design" class="level4">
-<h4 class="anchored" data-anchor-id="fpga-design">FPGA Design</h4>
-<p>The FPGA was designed using three modules written in SystemVerilog: the top level module, the switch-to-seven-segment logic module, and the counter logic module.</p>
-<p>The top level module was responsible for instantiating the other two modules and the switch-to-LED logic which was written using XOR and AND gates based on the truth tables.</p>
-<p>The switch-to-seven-segment logic module was responsible for taking the input from the switches and outputting the corresponding signals to the seven-segment display. Combinational logic was used to implement each combination of the four switches to display the correct segment patterns</p>
-<p>The counter logic module was responsible for using sequential logic to make an led blink at 2.4 Hz based on the 48 MHz internal HSOSC clock. The calculations used to divide the high frequency clock signal down to achieve the desired frequency are shown in Figure 1.</p>
+<section id="direction-logic" class="level3">
+<h3 class="anchored" data-anchor-id="direction-logic">Direction Logic</h3>
+<p>Everytime the sensor pulses, an interrupt is triggered and we read the encoder pins–hence getting the status of each sensor. Each pin will read either 0 or 1, and since it triggers an interrupt only when there is a change, we can figure out what direction the motor is turning.</p>
+<p>For example, if the interrupt is triggered by encoder A, we can see whether A is high or low. If A = 1, we know that A just became a rising edge. Therefore, if B = 0 at this time we know that A is leading and the motor is turning clockwise. On the other hand, if B = 1, then B is leading and the motor is turning counterclockwise. This logic can be seen in the diagram below (Figure 3).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab5_images/direction.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3: Direction Logic</figcaption>
+</figure>
+</div>
+<p>Figure 3: Direction is determined by the pin that triggers the interrupt and the status of the pins relative to each other.</p>
+</section>
+</section>
+<section id="technical-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation</h2>
+<p>The source code for the project can be found in the associated <a href="https://github.com/rlxkong/E155-Lab5">GitHub repository</a>.</p>
+<section id="schematic" class="level3">
+<h3 class="anchored" data-anchor-id="schematic">Schematic</h3>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Maximum Count Value Calculation
+Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -209,309 +241,504 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lab1_images/maxcount_calc.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 1: Calculations to find the maximum count value</figcaption>
+<p><img src="lab5_images/schematic.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 4: Schematic</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<p>There was also an enable and reset input implemented into the code.</p>
+<p>Figure 4 shows the schematic of the motor MCU circuit.</p>
 </section>
-<section id="testbench-design" class="level4">
-<h4 class="anchored" data-anchor-id="testbench-design">Testbench Design</h4>
-<p>Testbenches were created for each of the three modules to verify that the design was functioning as expected. The submodule testbenches used assertions to check that the output of each module matched the expected output for a given input with the 7-segment module covering all input-output pairs and the counter showing that reset, enable, and max count features all worked correctly. The top level module testbench was used to verify that the submodules were connected correctly, the HSOSC worked, and that the switch-to-LED logic was functioning as expected.</p>
 </section>
-<section id="hardware-testing" class="level4">
-<h4 class="anchored" data-anchor-id="hardware-testing">Hardware Testing</h4>
-<p>The 7-segment display circuit was built and assigned GPIO pins along with a current-limiting resistor which was calculated in Figure 2.</p>
+<section id="results-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
+<p>The design accomplished all of the design objectives. A majority of the lab was spent scanning through the datasheets and understanding how the direction logic would work before being able to implement the functionality into software.</p>
+<section id="polling-vs.-interrupting" class="level3">
+<h3 class="anchored" data-anchor-id="polling-vs.-interrupting">Polling vs.&nbsp;Interrupting</h3>
+<p>Polling constantly checks if the encoder outputs have changed, making it much faster than using interrupts. However, if the sampling rate is slower than the encoder signals, it could lead to aliasing behavior. Additionally, since it is constantly taking samples, it doesn’t sample on pulse edges, making it not feasible for determining direction like how we did in this lab. On the other hand, interrupts enable the microcontroller to immediately respond to specific events, making it more accurate, and in this case, allowing us to find the direction of the motor.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The design successfully output the speed and direction of the motor. This lab took me around 15 hours.</p>
+</section>
+<section id="ai-prototype-summary" class="level2">
+<h2 class="anchored" data-anchor-id="ai-prototype-summary">AI Prototype Summary</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Resistor Calculation
+<span class="screen-reader-only">Note</span>Initial ChatGPT Generated Code Prompt
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lab1_images/resistor_calc.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 2: Current-limiting resistor calculation</figcaption>
-</figure>
+<p>#include “main.h”</p>
+<p>volatile int32_t encoder_position = 0;</p>
+<p>/<em> </em> Previous 2-bit encoder state: <em> </em> bit 1 = Encoder B * bit 0 = Encoder A */ static uint8_t encoder_previous_state = 0;</p>
+<p>/<em> </em> Quadrature transition table. <em> </em> Index = (previous_state &lt;&lt; 2) | current_state <em> </em> Valid transitions: <em> </em> 00 -&gt; 01 -&gt; 11 -&gt; 10 -&gt; 00 = clockwise * 00 -&gt; 10 -&gt; 11 -&gt; 01 -&gt; 00 = counter-clockwise <em> </em> Invalid transitions are ignored. */ static const int8_t quadrature_table[16] = { 0, // 0000: 00 -&gt; 00 -1, // 0001: 00 -&gt; 01 1, // 0010: 00 -&gt; 10 0, // 0011: 00 -&gt; 11 (invalid)</p>
+<pre><code> 1,  // 0100: 01 -&gt; 00
+ 0,  // 0101: 01 -&gt; 01
+ 0,  // 0110: 01 -&gt; 10 (invalid)
+-1,  // 0111: 01 -&gt; 11
+
+-1,  // 1000: 11 -&gt; 00 (invalid)
+ 0,  // 1001: 11 -&gt; 01
+ 0,  // 1010: 11 -&gt; 10
+ 1,  // 1011: 11 -&gt; 11
+
+ 0,  // 1100: 10 -&gt; 00
+ 1,  // 1101: 10 -&gt; 01 (invalid)
+-1,  // 1110: 10 -&gt; 10
+ 0   // 1111: 10 -&gt; 11</code></pre>
+<p>};</p>
+<p>/<em> </em> Call this whenever either encoder input changes. */ static void Encoder_Update(void) { uint8_t A = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0); uint8_t B = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1);</p>
+<pre><code>uint8_t current_state = (B &lt;&lt; 1) | A;
+
+uint8_t index =
+    (encoder_previous_state &lt;&lt; 2) | current_state;
+
+encoder_position += quadrature_table[index];
+
+encoder_previous_state = current_state;</code></pre>
+<p>}</p>
+<p>/<em> </em> STM32 HAL EXTI callback. <em> </em> This gets called whenever PA0 or PA1 changes state. */ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) { if (GPIO_Pin == GPIO_PIN_0 || GPIO_Pin == GPIO_PIN_1) { Encoder_Update(); } }</p>
+<p>/<em> </em> EXTI0 interrupt handler for PA0. */ void EXTI0_IRQHandler(void) { HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0); }</p>
+<p>/<em> </em> EXTI1 interrupt handler for PA1. */ void EXTI1_IRQHandler(void) { HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1); }</p>
 </div>
 </div>
 </div>
-</div>
-</section>
-</section>
-<section id="technical-documentation" class="level2">
-<h2 class="anchored" data-anchor-id="technical-documentation">Technical Documentation</h2>
-<p>The source code for the project can be found in the associated <a href="https://github.com/rlxkong/E155-Lab1/tree/main/fpga/e155_lab1_rk">GitHub repository</a>.</p>
-<section id="block-diagram" class="level3">
-<h3 class="anchored" data-anchor-id="block-diagram">Block Diagram</h3>
+<p>This code couldn’t be built as it referenced pins/libraries that I didn’t have. However, after a bit of prompting such as sharing what files the segger embedded project contained, changing pins to match my hardware, and telling it to directly display the speed and direction it gave the code below with these outputs.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Block Diagram
+<span class="screen-reader-only">Note</span>Further Prompted ChatGPT Generated Code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lab1_images/block_diagram.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 3: Block Diagram of the top module</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>The block diagram in Figure 3 demonstrates the overall architecture of the design. The top-level module includes three submodules: the high-speed oscillator (HSOSC), the switch-to-seven-segment logic module, and the counter logic module. It also contains the switch-to-LED logic.</p>
-</section>
-<section id="schematic" class="level3">
-<h3 class="anchored" data-anchor-id="schematic">Schematic</h3>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Schematic
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lab1_images/schematic.jpg" class="img-fluid figure-img"></p>
-<figcaption>Figure 4: Schematic of the physical circuit</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>Figure 4 shows the schematic of the physical circuit. The 7-segment display is connected to the labeled GPIO pins through a current-limiting resistor and powered through the FPGA 3.3V supply.</p>
-</section>
-</section>
-<section id="results-and-discussion" class="level2">
-<h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
-<p>The design accomplished all of the design objectives.</p>
-<section id="testbench-simulation" class="level3">
-<h3 class="anchored" data-anchor-id="testbench-simulation">Testbench Simulation</h3>
-<p>Figure 5 show the successful simulation results of the top-level module testbench.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Top-Level Module Testbench Simulation
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lab1_images/top_test_pass.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 5: Top-level module testbench simulation results. The HSOSC is checked by checking that it was low in the first half of its period and high in the second half (11ns in).</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lab1_images/top_sim.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 6: The switch-to-LED logic is checked by checking that the output matches the expected output for a given input and the 7-segment input-output pairs are consistent as well to ensure connection to the 7-segment submodule.</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lab1_images/top_led2_sim.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 7: Top-level module connection to the counter module is shown through led2 changing states showing that its output responds to HSOSC.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>Figure 8 shows the successful simulation results of the counter module testbench. The counter is checked by verifying that the output changes state at the correct time based on the maxcount and that the reset and enable inputs work as expected.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Counter Module Testbench Simulation
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lab1_images/counter_sim.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 8: Counter module testbench waveforms</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lab1_images/enable-reset_sim.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 9: Enable and reset waveform validations</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lab1_images/frequency_reading.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 10: Frequency reading of the counter module output showing that it is blinking at 2.4 Hz</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>Figure 11 shows the successful simulation results of the switch-to-seven-segment module testbench. The module is checked by verifying that the output matches the expected output for all input-output pairs.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Switch-to-Seven-Segment Module Testbench Simulation
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lab1_images/sevenseg_sim.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 11: Switch-to-seven-segment module testbench waveforms</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>The design succesfully blinked an LED at 2.4 Hz, displayed the correct output on the 7-segment display based on the input from the switches, and displayed the correct output on the LEDs based on the input from the switches. I spent a total of around 30 hours working on this lab.</p>
-</section>
-<section id="ai-prototype-summary" class="level2">
-<h2 class="anchored" data-anchor-id="ai-prototype-summary">AI Prototype Summary</h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>ChatGPT Generated Code Attempt 1
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>module top ( output logic led );</p>
-<pre><code>// iCE40 UltraPlus internal high-frequency oscillator.
-// 24 MHz is one of the supported SB_HFOSC frequencies.
-logic clk;
+<p>#include “stm32l432xx.h” #include &lt;stdint.h&gt; #include &lt;stdio.h&gt;</p>
+<p>/* ============================================================ * USER SETTINGS * ============================================================ */</p>
+<p>/<em> </em> Encoder pulses per revolution. <em> </em> CHANGE THIS to match your encoder. <em> </em> Example: <em> </em> 20 PPR -&gt; 20 * 100 PPR -&gt; 100 <em> </em> We use x4 quadrature decoding, so: <em> </em> counts/revolution = PPR * 4 */ #define ENCODER_PPR 20</p>
+<p>#define COUNTS_PER_REV (ENCODER_PPR * 4)</p>
+<p>/<em> </em> How often the speed is calculated. <em> </em> 100 ms = 0.1 seconds */ #define SPEED_UPDATE_MS 100</p>
+<p>/* ============================================================ * GLOBAL VARIABLES * ============================================================ */</p>
+<p>/<em> </em> Current encoder position. <em> </em> This is modified inside the interrupt handler, so it must * be volatile. */ volatile int32_t encoder_count = 0;</p>
+<p>/<em> </em> Previous A/B encoder state. <em> </em> Values: <em> </em> 0 = 00 * 1 = 01 * 2 = 10 * 3 = 11 */ volatile uint8_t encoder_state = 0;</p>
+<p>/<em> </em> Millisecond system timer. */ volatile uint32_t system_ms = 0;</p>
+<p>/* ============================================================ * QUADRATURE LOOKUP TABLE * ============================================================ */</p>
+<p>/<em> </em> The quadrature encoder has four possible states: <em> </em> * B * 0 1 * +—+—+ * 0 | 00| 01| * A +—+—+ * 1 | 10| 11| * +—+—+ <em> </em> * One direction: <em> </em> 00 -&gt; 01 -&gt; 11 -&gt; 10 -&gt; 00 <em> </em> * Other direction: <em> </em> 00 -&gt; 10 -&gt; 11 -&gt; 01 -&gt; 00 <em> </em> * The table takes: <em> </em> old state + new state <em> </em> and returns: <em> </em> +1 = one direction * -1 = other direction * 0 = no movement / invalid transition <em> </em> * Index = (old_state &lt;&lt; 2) | new_state */ static const int8_t encoder_table[16] = { 0, 1, -1, 0, -1, 0, 0, 1, 1, 0, 0, -1, 0, -1, 1, 0 };</p>
+<p>/* ============================================================ * SYSTICK INTERRUPT * ============================================================ */</p>
+<p>/<em> </em> Called every 1 millisecond. */ void SysTick_Handler(void) { system_ms++; }</p>
+<p>/* ============================================================ * INITIALIZE SYSTICK * ============================================================ */</p>
+<p>static void SysTick_Init(void) { /<em> </em> Configure SysTick for a 1 ms interrupt. */ SysTick_Config(SystemCoreClock / 1000U); }</p>
+<p>/* ============================================================ * READ ENCODER STATE * ============================================================ */</p>
+<p>/<em> </em> Encoder wiring: <em> </em> Encoder A -&gt; PA8 * Encoder B -&gt; PA9 <em> </em> * Returns: <em> </em> 00 -&gt; 0 * 01 -&gt; 1 * 10 -&gt; 2 * 11 -&gt; 3 */ static uint8_t Encoder_ReadState(void) { uint32_t pins;</p>
+<pre><code>pins = GPIOA-&gt;IDR;
 
-SB_HFOSC #(
-    .CLKHF_DIV("0b00")       // 24 MHz
-) hfosc (
-    .CLKHFPU(1'b1),          // Power up oscillator
-    .CLKHFEN(1'b1),          // Enable oscillator
-    .CLKHF(clk)
+
+/*
+ * PA8 = Encoder A
+ *
+ * Put A into bit 1.
+ */
+
+uint8_t A = (pins &amp; (1U &lt;&lt; 8)) ? 1 : 0;
+
+
+/*
+ * PA9 = Encoder B
+ *
+ * Put B into bit 0.
+ */
+
+uint8_t B = (pins &amp; (1U &lt;&lt; 9)) ? 1 : 0;
+
+
+return (A &lt;&lt; 1) | B;</code></pre>
+<p>}</p>
+<p>/* ============================================================ * ENCODER INITIALIZATION * ============================================================ */</p>
+<p>static void Encoder_Init(void) { /<em> </em> ——————————————————– * Enable GPIOA clock * ——————————————————– */</p>
+<pre><code>RCC-&gt;AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
+
+
+/*
+ * --------------------------------------------------------
+ * Configure PA8 and PA9 as inputs.
+ *
+ * MODER:
+ *
+ * 00 = input
+ * 01 = output
+ * 10 = alternate function
+ * 11 = analog
+ * --------------------------------------------------------
+ */
+
+GPIOA-&gt;MODER &amp;= ~(
+    (3U &lt;&lt; (8 * 2)) |
+    (3U &lt;&lt; (9 * 2))
 );
 
-// 24 MHz / 12,000,000 = 2 Hz
-// Toggle the LED every 0.5 s.
-localparam int unsigned HALF_PERIOD = 12_000_000;
 
-logic [$clog2(HALF_PERIOD)-1:0] counter;
+/*
+ * --------------------------------------------------------
+ * Enable internal pull-ups.
+ *
+ * PUPDR:
+ *
+ * 00 = no pull
+ * 01 = pull-up
+ * 10 = pull-down
+ * --------------------------------------------------------
+ */
 
-always_ff @(posedge clk) begin
-    if (counter == HALF_PERIOD - 1) begin
-        counter &lt;= '0;
-        led     &lt;= ~led;
-    end
-    else begin
-        counter &lt;= counter + 1'b1;
-    end
-end</code></pre>
-<p>endmodule</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>ChatGPT Generated Code Succesful Synthesis
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>module top ( output logic led );</p>
-<pre><code>logic clk;
-
-// iCE40 UltraPlus internal high-speed oscillator.
-// Radiant primitive: HSOSC
-//
-// CLKHF_DIV:
-//   2'b00 = 48 MHz
-//   2'b01 = 24 MHz
-//   2'b10 = 12 MHz
-//   2'b11 =  6 MHz
-//
-HSOSC #(
-    .CLKHF_DIV(2'b01)
-) hfosc (
-    .CLKHFPU(1'b1),
-    .CLKHFEN(1'b1),
-    .CLKHF(clk)
+GPIOA-&gt;PUPDR &amp;= ~(
+    (3U &lt;&lt; (8 * 2)) |
+    (3U &lt;&lt; (9 * 2))
 );
 
-// 24 MHz clock.
-//
-// Toggle every 6,000,000 clocks:
-//
-//   6,000,000 / 24,000,000 = 0.25 seconds
-//
-// Thus:
-//   LED ON  = 0.25 s
-//   LED OFF = 0.25 s
-//   complete cycle = 0.5 s
-//   blink frequency = 2 Hz
-//
-localparam int unsigned HALF_PERIOD = 6_000_000;
-localparam int unsigned COUNTER_WIDTH = $clog2(HALF_PERIOD);
+GPIOA-&gt;PUPDR |= (
+    (1U &lt;&lt; (8 * 2)) |
+    (1U &lt;&lt; (9 * 2))
+);
 
-logic [COUNTER_WIDTH-1:0] counter = '0;
 
-always_ff @(posedge clk) begin
-    if (counter == HALF_PERIOD - 1) begin
-        counter &lt;= '0;
-        led     &lt;= ~led;
-    end
-    else begin
-        counter &lt;= counter + 1'b1;
-    end
-end</code></pre>
-<p>endmodule</p>
+/*
+ * --------------------------------------------------------
+ * Configure EXTI8 and EXTI9.
+ *
+ * PA8 -&gt; EXTI8
+ * PA9 -&gt; EXTI9
+ *
+ * Port A is the default EXTI source after reset.
+ * --------------------------------------------------------
+ */
+
+
+/*
+ * Interrupt on rising edges.
+ */
+
+EXTI-&gt;RTSR1 |=
+    EXTI_RTSR1_RT8 |
+    EXTI_RTSR1_RT9;
+
+
+/*
+ * Interrupt on falling edges.
+ */
+
+EXTI-&gt;FTSR1 |=
+    EXTI_FTSR1_FT8 |
+    EXTI_FTSR1_FT9;
+
+
+/*
+ * Unmask EXTI8 and EXTI9.
+ */
+
+EXTI-&gt;IMR1 |=
+    EXTI_IMR1_IM8 |
+    EXTI_IMR1_IM9;
+
+
+/*
+ * Clear any pending interrupt flags.
+ */
+
+EXTI-&gt;PR1 =
+    EXTI_PR1_PIF8 |
+    EXTI_PR1_PIF9;
+
+
+/*
+ * --------------------------------------------------------
+ * Enable EXTI9_5 interrupt in the NVIC.
+ *
+ * EXTI5, EXTI6, EXTI7, EXTI8 and EXTI9 share this handler.
+ * --------------------------------------------------------
+ */
+
+NVIC_SetPriority(EXTI9_5_IRQn, 2);
+
+NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+
+/*
+ * Get the initial encoder state.
+ */
+
+encoder_state = Encoder_ReadState();</code></pre>
+<p>}</p>
+<p>/* ============================================================ * UPDATE ENCODER * ============================================================ */</p>
+<p>static void Encoder_Update(void) { uint8_t new_state; uint8_t index; int8_t movement;</p>
+<pre><code>/*
+ * Read current A/B state.
+ */
+
+new_state = Encoder_ReadState();
+
+
+/*
+ * Combine old and new states.
+ */
+
+index = (encoder_state &lt;&lt; 2) | new_state;
+
+
+/*
+ * Look up the direction.
+ *
+ * +1 = clockwise
+ * -1 = counter-clockwise
+ *  0 = invalid/no movement
+ */
+
+movement = encoder_table[index];
+
+
+/*
+ * Update position.
+ */
+
+encoder_count += movement;
+
+
+/*
+ * Save the new state.
+ */
+
+encoder_state = new_state;</code></pre>
+<p>}</p>
+<p>/* ============================================================ * EXTI INTERRUPT HANDLER <em> </em> PA8 -&gt; EXTI8 * PA9 -&gt; EXTI9 <em> </em> Both use EXTI9_5_IRQHandler(). * ============================================================ */</p>
+<p>void EXTI9_5_IRQHandler(void) { /<em> </em> Check EXTI8 / PA8. */</p>
+<pre><code>if (EXTI-&gt;PR1 &amp; EXTI_PR1_PIF8)
+{
+    /*
+     * Clear interrupt flag.
+     */
+
+    EXTI-&gt;PR1 = EXTI_PR1_PIF8;
+
+
+    /*
+     * Decode encoder.
+     */
+
+    Encoder_Update();
+}
+
+
+/*
+ * Check EXTI9 / PA9.
+ */
+
+if (EXTI-&gt;PR1 &amp; EXTI_PR1_PIF9)
+{
+    /*
+     * Clear interrupt flag.
+     */
+
+    EXTI-&gt;PR1 = EXTI_PR1_PIF9;
+
+
+    /*
+     * Decode encoder.
+     */
+
+    Encoder_Update();
+}</code></pre>
+<p>}</p>
+<p>/* ============================================================ * PRINT ENCODER STATUS * ============================================================ */</p>
+<p>static void Encoder_PrintStatus(int32_t delta_count) { int32_t speed_x100;</p>
+<pre><code>/*
+ * Calculate speed.
+ *
+ * We measure for 100 ms.
+ *
+ * 100 ms = 0.1 seconds
+ *
+ *
+ * rev/s =
+ *
+ *       counts moved
+ *       -------------
+ *       counts/rev
+ *       -------------
+ *          0.1
+ *
+ *
+ * To get two decimal places:
+ *
+ * speed_x100 =
+ *
+ *       delta_count * 10 * 100
+ *       -----------------------
+ *          counts/rev
+ *
+ *       = delta_count * 1000 / COUNTS_PER_REV
+ */
+
+speed_x100 =
+    (delta_count * 1000) /
+    COUNTS_PER_REV;
+
+
+/*
+ * Print direction.
+ */
+
+printf("Direction: ");
+
+
+if (delta_count &gt; 0)
+{
+    printf("CW");
+}
+else if (delta_count &lt; 0)
+{
+    printf("CCW");
+
+    /*
+     * Make speed positive.
+     *
+     * Direction is displayed separately.
+     */
+
+    speed_x100 = -speed_x100;
+}
+else
+{
+    printf("STOP");
+
+    speed_x100 = 0;
+}
+
+
+/*
+ * Print speed.
+ *
+ * Example:
+ *
+ *     Speed: 2.35 rev/s
+ */
+
+printf(" | Speed: %ld.%02ld rev/s\r\n",
+       (long)(speed_x100 / 100),
+       (long)(speed_x100 % 100));</code></pre>
+<p>}</p>
+<p>/* ============================================================ * MAIN * ============================================================ */</p>
+<p>int main(void) { uint32_t last_update = 0;</p>
+<pre><code>int32_t previous_count = 0;
+
+
+/*
+ * --------------------------------------------------------
+ * Initialize encoder.
+ * --------------------------------------------------------
+ */
+
+Encoder_Init();
+
+
+/*
+ * --------------------------------------------------------
+ * Initialize 1 ms timer.
+ * --------------------------------------------------------
+ */
+
+SysTick_Init();
+
+
+/*
+ * --------------------------------------------------------
+ * Startup message.
+ * --------------------------------------------------------
+ */
+
+printf("\r\n");
+printf("==============================\r\n");
+printf("Quadrature Encoder\r\n");
+printf("==============================\r\n");
+printf("Encoder PPR: %d\r\n", ENCODER_PPR);
+printf("Counts/rev:  %d\r\n", COUNTS_PER_REV);
+printf("Ready!\r\n\r\n");
+
+
+/*
+ * --------------------------------------------------------
+ * Main loop.
+ * --------------------------------------------------------
+ */
+
+while (1)
+{
+    /*
+     * Update speed every 100 ms.
+     */
+
+    if ((system_ms - last_update) &gt;= SPEED_UPDATE_MS)
+    {
+        int32_t current_count;
+        int32_t delta_count;
+
+
+        /*
+         * Record update time.
+         */
+
+        last_update = system_ms;
+
+
+        /*
+         * Read current encoder position.
+         */
+
+        current_count = encoder_count;
+
+
+        /*
+         * Calculate how many counts occurred during
+         * the last 100 ms.
+         */
+
+        delta_count =
+            current_count - previous_count;
+
+
+        /*
+         * Save current position for next measurement.
+         */
+
+        previous_count = current_count;
+
+
+        /*
+         * Print direction and speed.
+         */
+
+        Encoder_PrintStatus(delta_count);
+    }
+}</code></pre>
+<p>}</p>
 </div>
 </div>
 </div>
-<p>The LLM-generated code is pretty good, with the general logic in how it approaches dividing the clock signal being very similar to what I did. However, the LLM-generated code had an error in its first attempt due to using the wrong internal osciallator of SB_HFOSC instead of HSOSC. After some prompting and providing greater context, the LLM was able to generate a correct version of the code that successfully synthesized. I do think its nice how throughly the LLM comments and explains the code and the calculations behind it. Therefore, given the user understands the task at hand and can provide sufficient context, the LLM can generate the code fairly succesfully and quickly.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab5_images/AIsuccess.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 5: AI Outputs</figcaption>
+</figure>
+</div>
 
 
 </section>
