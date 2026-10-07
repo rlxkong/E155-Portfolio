@@ -14,6 +14,7 @@ title: "E155 Labs"
 [Lab 4 Report](labs/lab4.qmd)
 
 ## Lab 5: Interrupts
+[Lab 5 Report](labs/lab5.qmd)
 
 ## Lab 6: The Internet of Things and Serial Peripheral Interface (SPI)
 
