@@ -28,17 +28,13 @@ Because this setup allows reading and writing of data simultaneously, when the M
 The temeperature sensor requires the CPHA must be set to 1 while operating in SPI mode. I then set CPOL to 0 which samples on the falling edge of each clock pulse. The baud rate is set to 5 (0b101) to get a clock rate of 1.25MHz as the maximum clock rate that the DS1722 can handle is 5MHz.
 
 
-![Figure 1: Logic Analyzer](lab5_images/speed.png)
+![Figure 1: Logic Analyzer - Write (Configuration)](lab6_images/write.png)
 
 Figure 1: Calculations to solve for motor speed.
 
-![Figure 2: Logic Analyzer](lab5_images/speed.png)
+![Figure 2: Logic Analyzer - Read](lab6_images/read.png)
 
 Figure 2: Calculations to solve for motor speed.
-
-![Figure 3: Logic Analyzer](lab5_images/speed.png)
-
-Figure 3: Calculations to solve for motor speed.
 
 
 ## Technical Documentation
@@ -47,10 +43,10 @@ The source code for the project can be found in the associated [GitHub repositor
 
 ### Schematic
 ::: {.callout-note collapse="true"}
-![Figure 4: Schematic](lab6_images/schematic.jpg)
+![Figure 3: Schematic](lab6_images/schematic.jpg)
 
 :::
-Figure 4 shows the schematic of the temperature sensor MCU circuit.
+Figure 3 shows the schematic of the temperature sensor MCU circuit.
 
 ## Results and Discussion
 The design accomplished all of the design objectives. A majority of the lab was spent scanning through the datasheets before being able to implement the functionality into software. 
