@@ -1,0 +1,78 @@
+---
+title: "Lab 6 Report"
+author: "Rebecca Kong"
+date: "10/28/26"
+draft: false
+---
+## Introduction
+In this lab, we used designed and built a simple IoT device with a focus on implementing the SPI functionality from the MCU. The MCU was interfaced with the temperature sensor module over an SPI link and an ESP8266 module over a UART link. It also connects to a simple HTML page to control and display the data from the peripherals connect to the MCU. The user can adjust the resolution as well as switching an onboard LED on and off through the HTML page. 
+
+## Design and Testing Methodology
+This lab has three main components: creating the HTML webpage using the MCU, transmitting the web page to a PC over the ESP8266, and setting up the communication between the MCU and the DS1722. The MCU interfaces with both the ESP8266 for the wifi module and the DS1722 digital temperature sensor. The user is able to interact with the HTML page to switch the LED and change the resolution. This information is then sent back via WiFi to the ESP8266 and then the MCU through UART. The MCU then adjusts the LED based on the user input and sends the resolution change request to the DS1722. The MCU also reads the temperature from the DS1722 upon every request, which it then sends back to the web page with the updated temperature values.
+
+### HTML Page
+The HTML page provides an interface for a user to interact with the system. There are buttons to adjust the resolution of the temperature readings as well as toggle the LED state. The webpage will then display the temperature data read from the temperature sensor alongside the resolution and LED state.
+
+
+### ESP8266 to MCU Interface
+The MCU must supply the web page to the ESP8266. It does so over a UART connection where the receive and transmit lines are crossed so that while the MCU transmits data the ESP8266 is receiving it and vice versa. 
+
+The devices interface through a 125000 baud serial UART connection on the MCU and the UART TX and RX lines of the ESP8266. To ensure both devices use the same bit timing, the UART baud rate is set to 125000 on both the MCU and the ESP8266.
+
+
+### Digital Temperature Sensor
+The digital temperature sensor and the MCU interface over SPI. For the MCU, the SPI was configured for full-duplex communication to allow communication between the temperature sensor and the MCU to occur both ways as well as aligning with the pin layout of the DS1722. Full-duplex allows sending and reading data simultaneously, as opposed to half-duplex which is bidirectional, making it so that only sending or reading can occur at once and simplex which simply only communicates in one direction. 
+
+Because this setup allows reading and writing of data simultaneously, when the MCU writes the resolution bits to the temperature sensor, it receives meaningless junk data in return--which is not utilized. The same thing occurs for the temperature information exchange, where the MCU reads the most recently completed temperature measurement and sends junk data that the temperature sensor does not use.
+
+The temeperature sensor requires the CPHA must be set to 1 while operating in SPI mode. I then set CPOL to 0 which samples on the falling edge of each clock pulse. The baud rate is set to 5 (0b101) to get a clock rate of 1.25MHz as the maximum clock rate that the DS1722 can handle is 5MHz.
+
+
+![Figure 1: Logic Analyzer](lab5_images/speed.png)
+
+Figure 1: Calculations to solve for motor speed.
+
+![Figure 2: Logic Analyzer](lab5_images/speed.png)
+
+Figure 2: Calculations to solve for motor speed.
+
+![Figure 3: Logic Analyzer](lab5_images/speed.png)
+
+Figure 3: Calculations to solve for motor speed.
+
+
+## Technical Documentation
+The source code for the project can be found in the associated [GitHub repository](https://github.com/rlxkong/E155-Lab6).
+
+
+### Schematic
+::: {.callout-note collapse="true"}
+![Figure 4: Schematic](lab6_images/schematic.jpg)
+
+:::
+Figure 4 shows the schematic of the temperature sensor MCU circuit.
+
+## Results and Discussion
+The design accomplished all of the design objectives. A majority of the lab was spent scanning through the datasheets before being able to implement the functionality into software. 
+
+## Conclusion
+The design successfully output the speed and direction of the motor. This lab took me around 12 hours.
+
+## AI Prototype Summary
+
+::: {.callout-note collapse="true"}
+## AI Generated Code for HTML Page
+
+// insert code
+:::
+
+![AI Generated Webpage](lab6_images/AIsuccess.png)
+
+This code couldn't be built as it referenced pins/libraries that I didn't have. However, after a bit of prompting such as sharing what files the segger embedded project contained, changing pins to match my hardware, and telling it to directly display the speed and direction it gave the code below with these outputs.
+
+
+::: {.callout-note collapse="true"}
+## AI Generated SPI Transaction Code
+// insert code
+
+:::
