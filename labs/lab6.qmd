@@ -56,17 +56,355 @@ The design successfully output the speed and direction of the motor. This lab to
 
 ::: {.callout-note collapse="true"}
 ## AI Generated Code for HTML Page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Sensor Portal</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --primary-color: #3b82f6;
+            --text-color: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --led-off: #9ca3af;
+            --led-on: #10b981;
+        }
 
-// insert code
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .dashboard {
+            width: 100%;
+            max-width: 420px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .card {
+            background: #fafafa;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Temperature Display */
+        .temp-display {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+            margin: 12px 0;
+        }
+
+        .temp-unit {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* Controls Section */
+        .control-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .control-row:last-child {
+            border-bottom: none;
+        }
+
+        .control-label {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--led-off);
+            transition: .3s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--led-on);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Precision Dropdown */
+        select {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #fff;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* LED Indicator Light */
+        .led-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--led-off);
+            margin-right: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .led-indicator.active {
+            background-color: var(--led-on);
+            box-shadow: 0 0 8px var(--led-on);
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <div class="header">
+        <h1>Sensor Portal</h1>
+        <p>Live Temperature & Controls</p>
+    </div>
+
+    <!-- Temperature Card -->
+    <div class="card">
+        <div class="temp-display">
+            <span id="tempValue">--</span><span class="temp-unit">°C</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted);" id="lastUpdated">Updating...</p>
+    </div>
+
+    <!-- Controls Card -->
+    <div class="card">
+        <!-- LED Control -->
+        <div class="control-row">
+            <div style="display: flex; align-items: center;">
+                <span id="ledStatusDot" class="led-indicator"></span>
+                <span class="control-label">LED Status</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="ledToggle" onchange="toggleLED(this.checked)">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <!-- Precision Control -->
+        <div class="control-row">
+            <span class="control-label">Decimal Precision</span>
+            <select id="precisionSelect" onchange="updatePrecision(this.value)">
+                <option value="0">0 (e.g. 24°C)</option>
+                <option value="1" selected>1 (e.g. 24.2°C)</option>
+                <option value="2">2 (e.g. 24.25°C)</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<script>
+    // System State
+    let rawTemperature = 23.456; // Mock initial value
+    let currentPrecision = 1;
+
+    // Element References
+    const tempValueEl = document.getElementById('tempValue');
+    const lastUpdatedEl = document.getElementById('lastUpdated');
+    const ledToggleEl = document.getElementById('ledToggle');
+    const ledStatusDotEl = document.getElementById('ledStatusDot');
+
+    // Update Temperature Display based on Precision
+    function renderTemperature() {
+        if (rawTemperature !== null) {
+            tempValueEl.textContent = rawTemperature.toFixed(currentPrecision);
+            lastUpdatedEl.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+        }
+    }
+
+    // Change Precision
+    function updatePrecision(value) {
+        currentPrecision = parseInt(value, 10);
+        renderTemperature();
+        
+        // Optional: Send selected precision to backend
+        /*
+        fetch('/api/precision', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ precision: currentPrecision })
+        });
+        */
+    }
+
+    // Control LED
+    function toggleLED(isOn) {
+        // UI Feedback
+        if (isOn) {
+            ledStatusDotEl.classList.add('active');
+        } else {
+            ledStatusDotEl.classList.remove('active');
+        }
+
+        // Send Command to Hardware API (ESP32 / Arduino / Raspberry Pi)
+        console.log(`LED State changed to: ${isOn ? 'ON' : 'OFF'}`);
+        
+        /*
+        fetch('/api/led', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ state: isOn ? 1 : 0 })
+        }).catch(err => console.error("Error toggling LED:", err));
+        */
+    }
+
+    // Fetch live sensor data (Simulated here with mock updates)
+    function fetchSensorData() {
+        // Replace this mock interval with your actual backend endpoint fetch:
+        /*
+        fetch('/api/temperature')
+            .then(res => res.json())
+            .then(data => {
+                rawTemperature = data.temperature;
+                renderTemperature();
+            });
+        */
+
+        // Simulated sensor variation for demo purposes
+        rawTemperature = 22 + Math.random() * 5;
+        renderTemperature();
+    }
+
+    // Initial Load & Polling setup (Fetch every 3 seconds)
+    renderTemperature();
+    setInterval(fetchSensorData, 3000);
+</script>
+
+</body>
+</html>
 :::
 
-![AI Generated Webpage](lab6_images/AIsuccess.png)
+![AI Generated Webpage](lab6_images/html.png)
 
-This code couldn't be built as it referenced pins/libraries that I didn't have. However, after a bit of prompting such as sharing what files the segger embedded project contained, changing pins to match my hardware, and telling it to directly display the speed and direction it gave the code below with these outputs.
-
+The interface for the AI generated webpage looks a lot nicer than the one I created and it took them a significantly shorter amount of time. This was generating random values by the AI, however, it wouldn't be that difficult to integrate into my current code--espeically if I were to give the AI the context of the rest of the code, it would be a great tool to use and quickly generate an interactive website.
 
 ::: {.callout-note collapse="true"}
 ## AI Generated SPI Transaction Code
-// insert code
+#include "stm32l4xx_hal.h"
 
+// Define the Chip Select (CS) port and pin (adjust to your schematic, e.g., PA4)
+#define DS1722_CS_PORT    GPIOA
+#define DS1722_CS_PIN     GPIO_PIN_4
+
+/**
+ * @brief  Retrieves the temperature reading from a DS1722 sensor via SPI.
+ * @param  hspi: Pointer to the SPI_HandleTypeDef structure (e.g., &hspi1).
+ * @return Temperature in degrees Celsius as a float. Returns -999.0f on error.
+ */
+float DS1722_ReadTemperature(SPI_HandleTypeDef *hspi) {
+    uint8_t txData = 0x01;       // Address 01h (LSB) with MSb (A7) = 0 for a Read operation
+    uint8_t rxData[2] = {0};     // rxData[0] = LSB, rxData[1] = MSB
+    int16_t rawTemp = 0;
+
+    // 1. Assert Chip Select (Drive LOW to select DS1722)
+    HAL_GPIO_WritePin(DS1722_CS_PORT, DS1722_CS_PIN, GPIO_PIN_RESET);
+
+    // 2. Transmit the read register address (0x01)
+    if (HAL_SPI_Transmit(hspi, &txData, 1, HAL_MAX_DELAY) != HAL_OK) {
+        HAL_GPIO_WritePin(DS1722_CS_PORT, DS1722_CS_PIN, GPIO_PIN_SET); // De-assert CS on error
+        return -999.0f; // Error indicator
+    }
+
+    // 3. Receive 2 bytes via burst read (LSB at 0x01, auto-increments to MSB at 0x02)
+    if (HAL_SPI_Receive(hspi, rxData, 2, HAL_MAX_DELAY) != HAL_OK) {
+        HAL_GPIO_WritePin(DS1722_CS_PORT, DS1722_CS_PIN, GPIO_PIN_SET); // De-assert CS on error
+        return -999.0f; // Error indicator
+    }
+
+    // 4. De-assert Chip Select (Drive HIGH to end transaction)
+    HAL_GPIO_WritePin(DS1722_CS_PORT, DS1722_CS_PIN, GPIO_PIN_SET);
+
+    // 5. Combine LSB and MSB into a 16-bit signed integer (Two's complement format)
+    rawTemp = (int16_t)((rxData[1] << 8) | rxData[0]);
+
+    // 6. Scale for resolution 
+    // Assuming default 12-bit resolution mode (1 LSB = 0.0625°C), 
+    // shifting right by 4 aligns the bits correctly.
+    rawTemp = rawTemp >> 4;
+
+    // Convert to actual Celsius value
+    float temperature = (float)rawTemp * 0.0625f;
+
+    return temperature;
+}
 :::
+
