@@ -247,23 +247,22 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>AI Generated Code for HTML Page
+<span class="screen-reader-only">Note</span>AI Generated HTML Page
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>// insert code</p>
-</div>
-</div>
-</div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lab6_images/AIsuccess.png" class="img-fluid figure-img"></p>
+<p><img src="lab6_images/html.png" class="img-fluid figure-img"></p>
 <figcaption>AI Generated Webpage</figcaption>
 </figure>
 </div>
-<p>This code couldn’t be built as it referenced pins/libraries that I didn’t have. However, after a bit of prompting such as sharing what files the segger embedded project contained, changing pins to match my hardware, and telling it to directly display the speed and direction it gave the code below with these outputs.</p>
+</div>
+</div>
+</div>
+<p>The interface for the AI generated webpage looks a lot nicer than the one I created and it took them a significantly shorter amount of time. This was generating random values by the AI, however, it wouldn’t be that difficult to integrate into my current code–espeically if I were to give the AI the context of the rest of the code, it would be a great tool to use and quickly generate an interactive website.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -276,10 +275,44 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>// insert code</p>
+<p>#include “stm32l4xx_hal.h”</p>
+<p>// Define the Chip Select (CS) port and pin (adjust to your schematic, e.g., PA4) #define DS1722_CS_PORT GPIOA #define DS1722_CS_PIN GPIO_PIN_4</p>
+<p>/** * <span class="citation" data-cites="brief">@brief</span> Retrieves the temperature reading from a DS1722 sensor via SPI. * <span class="citation" data-cites="param">@param</span> hspi: Pointer to the SPI_HandleTypeDef structure (e.g., &amp;hspi1). * <span class="citation" data-cites="return">@return</span> Temperature in degrees Celsius as a float. Returns -999.0f on error. <em>/ float DS1722_ReadTemperature(SPI_HandleTypeDef </em>hspi) { uint8_t txData = 0x01; // Address 01h (LSB) with MSb (A7) = 0 for a Read operation uint8_t rxData[2] = {0}; // rxData[0] = LSB, rxData[1] = MSB int16_t rawTemp = 0;</p>
+<pre><code>// 1. Assert Chip Select (Drive LOW to select DS1722)
+HAL_GPIO_WritePin(DS1722_CS_PORT, DS1722_CS_PIN, GPIO_PIN_RESET);
+
+// 2. Transmit the read register address (0x01)
+if (HAL_SPI_Transmit(hspi, &amp;txData, 1, HAL_MAX_DELAY) != HAL_OK) {
+    HAL_GPIO_WritePin(DS1722_CS_PORT, DS1722_CS_PIN, GPIO_PIN_SET); // De-assert CS on error
+    return -999.0f; // Error indicator
+}
+
+// 3. Receive 2 bytes via burst read (LSB at 0x01, auto-increments to MSB at 0x02)
+if (HAL_SPI_Receive(hspi, rxData, 2, HAL_MAX_DELAY) != HAL_OK) {
+    HAL_GPIO_WritePin(DS1722_CS_PORT, DS1722_CS_PIN, GPIO_PIN_SET); // De-assert CS on error
+    return -999.0f; // Error indicator
+}
+
+// 4. De-assert Chip Select (Drive HIGH to end transaction)
+HAL_GPIO_WritePin(DS1722_CS_PORT, DS1722_CS_PIN, GPIO_PIN_SET);
+
+// 5. Combine LSB and MSB into a 16-bit signed integer (Two's complement format)
+rawTemp = (int16_t)((rxData[1] &lt;&lt; 8) | rxData[0]);
+
+// 6. Scale for resolution 
+// Assuming default 12-bit resolution mode (1 LSB = 0.0625°C), 
+// shifting right by 4 aligns the bits correctly.
+rawTemp = rawTemp &gt;&gt; 4;
+
+// Convert to actual Celsius value
+float temperature = (float)rawTemp * 0.0625f;
+
+return temperature;</code></pre>
+<p>}</p>
 </div>
 </div>
 </div>
+<p>The logic of this code overall seems correct, however, I can’t integrate it with my code as it utalizes “stm32l4xx_hal” which I don’t use and it uses multiple variables that I don’t use either. Additionally, it drives CS to low in order to select DS1722 even though the CE is active high. I think the way it implmented and combined the temperature is interesting and valuable, however it didn’t recognize the signed bit. Overall, it is actually pretty impressive and if it was given the actual code (context) it could probably do a pretty good job. However, it would probably still require a person to look over an ensure the correct pins and very specific datasheet requirements are implemented.</p>
 
 
 </section>
