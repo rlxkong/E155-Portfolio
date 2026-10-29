@@ -74,7 +74,7 @@
     "href": "labs.html#lab-6-the-internet-of-things-and-serial-peripheral-interface-spi",
     "title": "E155 Labs",
     "section": "Lab 6: The Internet of Things and Serial Peripheral Interface (SPI)",
-    "text": "Lab 6: The Internet of Things and Serial Peripheral Interface (SPI)"
+    "text": "Lab 6: The Internet of Things and Serial Peripheral Interface (SPI)\nLab 6 Report"
   },
   {
     "objectID": "labs.html#lab-7-the-advanced-encryption-standard-aes",
@@ -376,5 +376,54 @@
     "title": "Week 2 Reflections",
     "section": "Reflections on Lab",
     "text": "Reflections on Lab\nThis lab really made me understand the power of trauma bonding. The long nights grinding away in the digital lab and ECF seemed so much more fun and lively surrounded by fellow peers struggling to complete the same assignment. Being able to discuss issues we were all facing or faced, taking turns trying to debug each others code, and just bein able to celebrate whenever someone was able to accomplish a minor achievement has made the grueling task of checking off specifications so much more fun. Despite spending a lot of time struggling with the lab both in terms of comprehending the task at hand and actually implementing the features, I never thought I would get to have so many snack sessions and Jay’s runs–even going as far as to learn phrases in Arabic. I fear for the next lab though…"
+  },
+  {
+    "objectID": "labs/lab6.html",
+    "href": "labs/lab6.html",
+    "title": "Lab 6 Report",
+    "section": "",
+    "text": "In this lab, we used designed and built a simple IoT device with a focus on implementing the SPI functionality from the MCU. The MCU was interfaced with the temperature sensor module over an SPI link and an ESP8266 module over a UART link. It also connects to a simple HTML page to control and display the data from the peripherals connect to the MCU. The user can adjust the resolution as well as switching an onboard LED on and off through the HTML page."
+  },
+  {
+    "objectID": "labs/lab6.html#introduction",
+    "href": "labs/lab6.html#introduction",
+    "title": "Lab 6 Report",
+    "section": "",
+    "text": "In this lab, we used designed and built a simple IoT device with a focus on implementing the SPI functionality from the MCU. The MCU was interfaced with the temperature sensor module over an SPI link and an ESP8266 module over a UART link. It also connects to a simple HTML page to control and display the data from the peripherals connect to the MCU. The user can adjust the resolution as well as switching an onboard LED on and off through the HTML page."
+  },
+  {
+    "objectID": "labs/lab6.html#design-and-testing-methodology",
+    "href": "labs/lab6.html#design-and-testing-methodology",
+    "title": "Lab 6 Report",
+    "section": "Design and Testing Methodology",
+    "text": "Design and Testing Methodology\nThis lab has three main components: creating the HTML webpage using the MCU, transmitting the web page to a PC over the ESP8266, and setting up the communication between the MCU and the DS1722. The MCU interfaces with both the ESP8266 for the wifi module and the DS1722 digital temperature sensor. The user is able to interact with the HTML page to switch the LED and change the resolution. This information is then sent back via WiFi to the ESP8266 and then the MCU through UART. The MCU then adjusts the LED based on the user input and sends the resolution change request to the DS1722. The MCU also reads the temperature from the DS1722 upon every request, which it then sends back to the web page with the updated temperature values.\n\nHTML Page\nThe HTML page provides an interface for a user to interact with the system. There are buttons to adjust the resolution of the temperature readings as well as toggle the LED state. The webpage will then display the temperature data read from the temperature sensor alongside the resolution and LED state.\n\n\nESP8266 to MCU Interface\nThe MCU must supply the web page to the ESP8266. It does so over a UART connection where the receive and transmit lines are crossed so that while the MCU transmits data the ESP8266 is receiving it and vice versa.\nThe devices interface through a 125000 baud serial UART connection on the MCU and the UART TX and RX lines of the ESP8266. To ensure both devices use the same bit timing, the UART baud rate is set to 125000 on both the MCU and the ESP8266.\n\n\nDigital Temperature Sensor\nThe digital temperature sensor and the MCU interface over SPI. For the MCU, the SPI was configured for full-duplex communication to allow communication between the temperature sensor and the MCU to occur both ways as well as aligning with the pin layout of the DS1722. Full-duplex allows sending and reading data simultaneously, as opposed to half-duplex which is bidirectional, making it so that only sending or reading can occur at once and simplex which simply only communicates in one direction.\nBecause this setup allows reading and writing of data simultaneously, when the MCU writes the resolution bits to the temperature sensor, it receives meaningless junk data in return–which is not utilized. The same thing occurs for the temperature information exchange, where the MCU reads the most recently completed temperature measurement and sends junk data that the temperature sensor does not use.\nThe temeperature sensor requires the CPHA must be set to 1 while operating in SPI mode. I then set CPOL to 0 which samples on the falling edge of each clock pulse. The baud rate is set to 5 (0b101) to get a clock rate of 1.25MHz as the maximum clock rate that the DS1722 can handle is 5MHz.\n\n\n\nFigure 1: Logic Analyzer - Write (Configuration)\n\n\nFigure 1: Calculations to solve for motor speed.\n\n\n\nFigure 2: Logic Analyzer - Read\n\n\nFigure 2: Calculations to solve for motor speed."
+  },
+  {
+    "objectID": "labs/lab6.html#technical-documentation",
+    "href": "labs/lab6.html#technical-documentation",
+    "title": "Lab 6 Report",
+    "section": "Technical Documentation",
+    "text": "Technical Documentation\nThe source code for the project can be found in the associated GitHub repository.\n\nSchematic\n\n\n\nFigure 3: Schematic\n\n\nFigure 3 shows the schematic of the temperature sensor MCU circuit."
+  },
+  {
+    "objectID": "labs/lab6.html#results-and-discussion",
+    "href": "labs/lab6.html#results-and-discussion",
+    "title": "Lab 6 Report",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nThe design accomplished all of the design objectives. A majority of the lab was spent scanning through the datasheets before being able to implement the functionality into software."
+  },
+  {
+    "objectID": "labs/lab6.html#conclusion",
+    "href": "labs/lab6.html#conclusion",
+    "title": "Lab 6 Report",
+    "section": "Conclusion",
+    "text": "Conclusion\nThe design successfully output the speed and direction of the motor. This lab took me around 12 hours."
+  },
+  {
+    "objectID": "labs/lab6.html#ai-prototype-summary",
+    "href": "labs/lab6.html#ai-prototype-summary",
+    "title": "Lab 6 Report",
+    "section": "AI Prototype Summary",
+    "text": "AI Prototype Summary\n\n\n\n\n\n\nNoteAI Generated Code for HTML Page\n\n\n\n\n\n// insert code\n\n\n\n\n\n\nAI Generated Webpage\n\n\nThis code couldn’t be built as it referenced pins/libraries that I didn’t have. However, after a bit of prompting such as sharing what files the segger embedded project contained, changing pins to match my hardware, and telling it to directly display the speed and direction it gave the code below with these outputs.\n\n\n\n\n\n\nNoteAI Generated SPI Transaction Code\n\n\n\n\n\n// insert code"
   }
 ]

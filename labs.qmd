@@ -17,5 +17,6 @@ title: "E155 Labs"
 [Lab 5 Report](labs/lab5.qmd)
 
 ## Lab 6: The Internet of Things and Serial Peripheral Interface (SPI)
+[Lab 6 Report](labs/lab6.qmd)
 
 ## Lab 7: The Advanced Encryption Standard (AES)
